@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   ft_strchr_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/13 18:15:57 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/01/16 17:25:32 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/01/16 17:28:15 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "libft.h"
 
-# include "libft/includes/libft.h"
-# include <dirent.h>
-
-typedef struct			s_flags
+int	ft_strchr_count(const char *s, int c)
 {
-	int					a;
-	int					l;
-	int					r;
-	int					R;
-	int					t;
-}						t_flags;
+	int	i;
+	int	counter;
 
-typedef struct			s_path
-{
-	char				*path;
-	struct s_path		*next;
-}						t_path;
-
-int				set_flags(char *arg, t_flags *flags);
-t_path			*set_path(t_path *path, char *arg);
-
-
-#endif
+	i = 0;
+	counter = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			counter++;
+		i++;
+	}
+	return (counter);
+}
