@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 16:05:23 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/15 18:03:10 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ int		read_args(int ac, char **av, t_flags *flags, t_path **path)
 	nb_path = 0;
 	while (i < ac)
 	{
-		if (av[i][0] != '-' && ++nb_path)
-			set_path(path, av[i]);
-		else if (av[i][0] == '-' && nb_path == 0)
+		if (av[i][0] == '-' && nb_path == 0)
 			set_flags(av[i] + 1, flags);
+		else if (av[i][0] != '-' && ++nb_path)
+			set_path(path, flags, av[i]);
 		else
 			return (0);
 		i++;
 	}
+	if (!(nb_path))
+		set_path(path, flags, ".");
 	ft_putstr((*path)->path);
-	ft_putnbr(flags->a);
-	ft_putnbr(flags->l);
-	ft_putnbr(flags->r);
-	ft_putnbr(flags->rec);
-	ft_putnbr(flags->t);
+	ft_putnbr((*path)->flags->a);
+	ft_putnbr((*path)->flags->l);
+	ft_putnbr((*path)->flags->r);
+	ft_putnbr((*path)->flags->rec);
+	ft_putnbr((*path)->flags->t);
 	return (1);
 }
 
@@ -54,10 +56,8 @@ int		main(int ac, char **av)
 
 	path = NULL;
 	init_flags(&flags);
-	DEBUG;
-	read_args(ac, av, &flags, &path);
-	DEBUG;
-	ft_putnbr(open_path(path));
-	DEBUG;
+	if (read_args(ac, av, &flags, &path) == 0)
+		return (-1);
+	open_path(path);
 	return (0);
 }

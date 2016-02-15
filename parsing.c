@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 16:02:40 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/15 18:48:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_ls.h"
@@ -15,22 +15,12 @@ int		open_path(t_path *path)
 {
 	DIR	*dirp;
 	struct dirent *file;
-	if (path == NULL)
-	{
-		printf("sohvsih\n");
-		return (0);
-	}
 
-	if ((dirp = opendir(ft_strjoin(path->path, "/"))) == NULL)
-	{
-		perror("rien");
-		DEBUG;
+	if (path == NULL)
 		return (0);
-	}
-	DEBUG;
-	while ((file = readdir(dirp)) != NULL)
-		ft_putendl(file->d_name);
-	DEBUG;
+	if ((dirp = opendir(path->path)) == NULL)
+		return (0);
+	store_files();
 	return (1);
 }
 
@@ -58,16 +48,16 @@ int		set_flags(char *arg, t_flags *flags)
 	return (i == 0 ? 0 : 1);
 }
 
-int		set_path(t_path **path, char *arg)
+int		set_path(t_path **path, t_flags *flags , char *arg)
 {
 	t_path *new;
 	t_path *tmp;
 
 	if (!(new = (t_path *)malloc(sizeof(*new))))
-		return (-1);
+		return (0);
 	new->path = ft_strdup(arg);
+	new->flags = flags;
 	new->next = NULL;
-	DEBUG;
 	if (*path == NULL)
 	{
 		*path = new;
@@ -77,6 +67,5 @@ int		set_path(t_path **path, char *arg)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
-	DEBUG;
 	return (1);
 }
