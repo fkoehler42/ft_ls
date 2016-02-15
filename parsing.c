@@ -6,21 +6,43 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 18:48:17 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/15 20:29:16 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_ls.h"
 
-int		open_path(t_path *path)
+int		store_file(t_path **path, struct dirent *file)
+{
+	t_file	*new;
+	t_file	*tmp;
+
+	if (!(new = (t_file *)malloc(sizeof(*new))))
+		return (0);
+	new->file = file;
+	new->next = NULL;
+	if ((*path)->file == NULL)
+		(*path)->file = new;
+	else
+	{
+		tmp = (*path)->file;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return (1);
+}
+
+int		open_path(t_path **path)
 {
 	DIR	*dirp;
 	struct dirent *file;
 
 	if (path == NULL)
 		return (0);
-	if ((dirp = opendir(path->path)) == NULL)
+	if ((dirp = opendir((*path)->path)) == NULL)
 		return (0);
-	store_files();
+	while ((file = readdir(dirp)) != NULL)
+		store_file(path, file);
 	return (1);
 }
 
@@ -58,14 +80,15 @@ int		set_path(t_path **path, t_flags *flags , char *arg)
 	new->path = ft_strdup(arg);
 	new->flags = flags;
 	new->next = NULL;
+	new->file = NULL;
 	if (*path == NULL)
-	{
 		*path = new;
-		return (1);
+	else
+	{
+		tmp = *path;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	tmp = *path;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
 	return (1);
 }

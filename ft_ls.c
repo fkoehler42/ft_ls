@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 18:03:10 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/15 19:46:41 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int		main(int ac, char **av)
 	init_flags(&flags);
 	if (read_args(ac, av, &flags, &path) == 0)
 		return (-1);
-	open_path(path);
+	open_path(&path);
 	return (0);
 }
