@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 15:24:48 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 15:26:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 18:22:13 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int		store_file(t_path **path, char *file)
 
 	if (!(new = (t_file *)malloc(sizeof(*new))))
 		return (0);
-	new->name = file;
+	new->f_name = ft_strdup(file);
 	new->next = NULL;
-	ft_putendl(new->name);
+	ft_putendl(new->f_name);
 	if ((*path)->file == NULL)
 		(*path)->file = new;
 	else
@@ -34,20 +34,26 @@ int		store_file(t_path **path, char *file)
 	return (1);
 }
 
-int		open_path(t_path **path)
+int		open_path(t_path **path, char *p_name)
 {
 	DIR	*dirp;
 	struct dirent *file;
+	t_path **tmp;
 
-	while ((*path) != NULL)
+	if (path == NULL)
+		return (0);
+	tmp = path;
+	while (*tmp != NULL)
 	{
-		if (path == NULL)
-			return (0);
-		if ((dirp = opendir((*path)->path)) == NULL)
+		if ((dirp = opendir(p_name)) == NULL)
 			return (0);
 		while ((file = readdir(dirp)) != NULL)
-			store_file(path, file->d_name);
-		*path = (*path)->next;
+		{
+			if ((*tmp)->flags->rec && file->d_type == DT_DIR)
+				set_path(path, (*path)->flags, file->d_name);
+			store_file(tmp, file->d_name);
+		}
+		*tmp = (*tmp)->next;
 	}
 	return (1);
 }

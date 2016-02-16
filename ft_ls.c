@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 19:46:41 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 18:22:16 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ int		read_args(int ac, char **av, t_flags *flags, t_path **path)
 	}
 	if (!(nb_path))
 		set_path(path, flags, ".");
-	ft_putstr((*path)->path);
-	ft_putnbr((*path)->flags->a);
-	ft_putnbr((*path)->flags->l);
-	ft_putnbr((*path)->flags->r);
-	ft_putnbr((*path)->flags->rec);
-	ft_putnbr((*path)->flags->t);
 	return (1);
 }
 
@@ -58,6 +52,6 @@ int		main(int ac, char **av)
 	init_flags(&flags);
 	if (read_args(ac, av, &flags, &path) == 0)
 		return (-1);
-	open_path(&path);
+	open_path(&path, path->p_name);
 	return (0);
 }

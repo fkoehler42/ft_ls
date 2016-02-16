@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 15:26:03 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 18:22:18 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		set_path(t_path **path, t_flags *flags , char *arg)
 
 	if (!(new = (t_path *)malloc(sizeof(*new))))
 		return (0);
-	new->path = ft_strdup(arg);
+	new->p_name = ft_strdup(arg);
 	new->flags = flags;
 	new->next = NULL;
 	new->file = NULL;

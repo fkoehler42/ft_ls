@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 15:29:36 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 18:22:21 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct			s_flags
 
 typedef struct			s_path
 {
-	char				*path;
+	char				*p_name;
 	struct s_flags		*flags;
 	struct s_file		*file;
 	struct s_path		*next;
@@ -40,13 +40,13 @@ typedef struct			s_path
 
 typedef struct			s_file
 {
-	char				*name;
+	char				*f_name;
 	struct s_file		*next;
 }						t_file;
 
 int				set_flags(char *arg, t_flags *flags);
 int				set_path(t_path **path,t_flags *flags , char *arg);
-int				open_path(t_path **path);
+int				open_path(t_path **path, char *p_name);
 void			perror(const char *s);
 
 #endif
