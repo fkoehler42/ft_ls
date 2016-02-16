@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 20:29:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 12:56:46 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_ls.h"
@@ -18,7 +18,6 @@ int		store_file(t_path **path, struct dirent *file)
 
 	if (!(new = (t_file *)malloc(sizeof(*new))))
 		return (0);
-	new->file = file;
 	new->next = NULL;
 	if ((*path)->file == NULL)
 		(*path)->file = new;
@@ -37,12 +36,16 @@ int		open_path(t_path **path)
 	DIR	*dirp;
 	struct dirent *file;
 
-	if (path == NULL)
-		return (0);
-	if ((dirp = opendir((*path)->path)) == NULL)
-		return (0);
-	while ((file = readdir(dirp)) != NULL)
-		store_file(path, file);
+	while ((*path) != NULL)
+	{
+		if (path == NULL)
+			return (0);
+		if ((dirp = opendir((*path)->path)) == NULL)
+			return (0);
+		while ((file = readdir(dirp)) != NULL)
+			store_file(path, file);
+		*path = (*path)->next;
+	}
 	return (1);
 }
 
