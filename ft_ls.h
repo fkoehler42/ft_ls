@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/15 20:27:04 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/16 15:29:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/includes/libft.h"
 # include <dirent.h>
+# include <sys/stat.h>
 # include <errno.h>
 # include <stdio.h>
 
@@ -39,7 +40,7 @@ typedef struct			s_path
 
 typedef struct			s_file
 {
-	struct dirent 		*file;
+	char				*name;
 	struct s_file		*next;
 }						t_file;
 
