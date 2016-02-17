@@ -1,34 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:30:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/17 17:03:35 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/17 19:21:11 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	alphabetical_order(t_path *path)
+void	lexicographical_order(t_path *path, t_file *new)
 {
-	t_file	*tmp1;
-	t_file	*tmp2;
+	t_file	*tmp;
 
-	tmp1 = path->file;
-	tmp2 = tmp;
-	while (tmp->next)
+	tmp = path->file;
+	if ((ft_strcmp(new->f_name, tmp->f_name)) <= 0)
 	{
-		if ((ft_strcmp(tmp->f_name, tmp->next->f_name)) > 0)
-		{
-			tmp2
-		}
+		path->file = new;
+		new->next = tmp;
+	}
+	else
+	{
+		while (tmp->next && ((ft_strcmp(new->f_name, tmp->next->f_name)) > 0))
+			tmp = tmp->next;
+		new->next = tmp->next;
+		tmp->next = new;
 	}
 }
 
-void	sort_files(t_flag *flag)
+void	rev_lexicographical_order(t_path *path, t_file *new)
 {
-	alphabetical_order(flag->path);
+	t_file	*tmp;
+
+	tmp = path->file;
+	if ((ft_strcmp(new->f_name, tmp->f_name)) >= 0)
+	{
+		path->file = new;
+		new->next = tmp;
+	}
+	else
+	{
+		while (tmp->next && ((ft_strcmp(new->f_name, tmp->next->f_name)) < 0))
+			tmp = tmp->next;
+		new->next = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void	sort_file(t_flag *flag, t_file *new)
+{
+	if (flag->r)
+		rev_lexicographical_order(flag->path, new);
+	else
+		lexicographical_order(flag->path, new);
 }

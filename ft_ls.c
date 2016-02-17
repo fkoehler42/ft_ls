@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/17 16:22:07 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/17 19:29:37 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		main(int ac, char **av)
 		return (-1);
 	while (flag->path)
 	{
-		read_path(flag);
+		read_path(flag, flag->path->p_name);
 		flag->path = flag->path->next;
 	}
 	return (0);
