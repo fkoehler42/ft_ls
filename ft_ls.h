@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 18:22:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:16:53 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@
 
 # define DEBUG printf("%s, %d\n", __FILE__, __LINE__)
 
-typedef struct			s_flags
+typedef struct			s_flag
 {
 	int					a;
 	int					l;
 	int					r;
 	int					rec;
 	int					t;
-}						t_flags;
+	struct s_path		*path;
+}						t_flag;
 
 typedef struct			s_path
 {
 	char				*p_name;
-	struct s_flags		*flags;
 	struct s_file		*file;
 	struct s_path		*next;
 }						t_path;
@@ -44,9 +44,9 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
-int				set_flags(char *arg, t_flags *flags);
-int				set_path(t_path **path,t_flags *flags , char *arg);
-int				open_path(t_path **path, char *p_name);
+int				set_flags(char *arg, t_flag *flag);
+int				add_path(t_flag *flag, char *arg);
+int				read_path(t_flag *flag);
 void			perror(const char *s);
 
 #endif

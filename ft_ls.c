@@ -6,22 +6,28 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 18:22:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/17 16:22:07 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	init_flags(t_flags *flags)
+t_flag	*create_flag_struct(void)
 {
-	flags->a = 0;
-	flags->l = 0;
-	flags->r = 0;
-	flags->rec = 0;
-	flags->t = 0;
+	t_flag	*flag;
+
+	if (!(flag = (t_flag *)malloc(sizeof(*flag))))
+		return (NULL);
+	flag->a = 0;
+	flag->l = 0;
+	flag->r = 0;
+	flag->rec = 0;
+	flag->t = 0;
+	flag->path = NULL;
+	return (flag);
 }
 
-int		read_args(int ac, char **av, t_flags *flags, t_path **path)
+int		read_args(int ac, char **av, t_flag *flag)
 {
 	int		i;
 	int		nb_path;
@@ -31,27 +37,29 @@ int		read_args(int ac, char **av, t_flags *flags, t_path **path)
 	while (i < ac)
 	{
 		if (av[i][0] == '-' && nb_path == 0)
-			set_flags(av[i] + 1, flags);
+			set_flags(av[i] + 1, flag);
 		else if (av[i][0] != '-' && ++nb_path)
-			set_path(path, flags, av[i]);
+			add_path(flag, av[i]);
 		else
 			return (0);
 		i++;
 	}
 	if (!(nb_path))
-		set_path(path, flags, ".");
+		add_path(flag, ".");
 	return (1);
 }
 
 int		main(int ac, char **av)
 {
-	t_flags	flags;
-	t_path	*path;
+	t_flag	*flag;
 
-	path = NULL;
-	init_flags(&flags);
-	if (read_args(ac, av, &flags, &path) == 0)
+	flag = create_flag_struct();
+	if (read_args(ac, av, flag) == 0)
 		return (-1);
-	open_path(&path, path->p_name);
+	while (flag->path)
+	{
+		read_path(flag);
+		flag->path = flag->path->next;
+	}
 	return (0);
 }

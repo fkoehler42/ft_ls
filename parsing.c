@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/16 18:22:18 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/17 15:57:04 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		set_flags(char *arg, t_flags *flags)
+int		set_flags(char *arg, t_flag *flag)
 {
 	int	i;
 
@@ -20,15 +20,15 @@ int		set_flags(char *arg, t_flags *flags)
 	while (arg[i])
 	{
 		if (arg[i] == 'a')
-			flags->a = 1;
+			flag->a = 1;
 		else if (arg[i] == 'l')
-			flags->l = 1;
+			flag->l = 1;
 		else if (arg[i] == 'r')
-			flags->r = 1;
+			flag->r = 1;
 		else if (arg[i] == 'R')
-			flags->rec = 1;
+			flag->rec = 1;
 		else if (arg[i] == 't')
-			flags->t = 1;
+			flag->t = 1;
 		else
 			return (0);
 		i++;
@@ -36,7 +36,7 @@ int		set_flags(char *arg, t_flags *flags)
 	return (i == 0 ? 0 : 1);
 }
 
-int		set_path(t_path **path, t_flags *flags , char *arg)
+int		add_path(t_flag *flag, char *arg)
 {
 	t_path *new;
 	t_path *tmp;
@@ -44,14 +44,13 @@ int		set_path(t_path **path, t_flags *flags , char *arg)
 	if (!(new = (t_path *)malloc(sizeof(*new))))
 		return (0);
 	new->p_name = ft_strdup(arg);
-	new->flags = flags;
 	new->next = NULL;
 	new->file = NULL;
-	if (*path == NULL)
-		*path = new;
+	if (flag->path == NULL)
+		flag->path = new;
 	else
 	{
-		tmp = *path;
+		tmp = flag->path;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
