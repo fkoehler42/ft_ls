@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/18 15:36:04 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/18 19:22:00 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ t_path	*read_args(int ac, char **av, t_flag *flag)
 		if (av[i][0] == '-' && nb_path == 0)
 			set_flags(av[i] + 1, flag);
 		else if (av[i][0] != '-' && ++nb_path)
-			add_path(&path, av[i]);
+			add_path(*flag, &path, av[i]);
 		else
 			return (NULL);
 		i++;
 	}
 	if (!(nb_path))
-		add_path(&path, ".");
+		add_path(*flag, &path, ".");
 	return (path);
 }
 
