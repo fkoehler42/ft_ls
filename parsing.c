@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/17 20:15:38 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/18 16:58:20 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		set_flags(char *arg, t_flag *flag)
 	return (i == 0 ? 0 : 1);
 }
 
-int		add_path(t_flag *flag, char *arg)
+int		add_path(t_path **path, char *arg)
 {
 	t_path *new;
 	t_path *tmp;
@@ -46,11 +46,11 @@ int		add_path(t_flag *flag, char *arg)
 	new->p_name = ft_strdup(arg);
 	new->next = NULL;
 	new->file = NULL;
-	if (flag->path == NULL)
-		flag->path = new;
+	if (*path == NULL)
+		*path = new;
 	else
 	{
-		tmp = flag->path;
+		tmp = *path;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;

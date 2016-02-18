@@ -6,17 +6,17 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/17 20:39:41 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/18 14:46:00 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_files(t_flag *flag)
+void	print_files(t_path *path)
 {
 	t_file	*tmp;
 
-	tmp = flag->path->file;
+	tmp = path->file;
 	while (tmp)
 	{
 		ft_putendl(tmp->f_name);
