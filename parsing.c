@@ -6,11 +6,19 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/18 18:55:47 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/19 12:32:32 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	set_sorting_func(t_flag *flag)
+{
+	if (flag->r)
+		flag->fptr = &rev_lexicographical_order;
+	else
+		path->fptr = &lexicographical_order;
+}
 
 int		set_flags(char *arg, t_flag *flag)
 {
@@ -34,20 +42,5 @@ int		set_flags(char *arg, t_flag *flag)
 		i++;
 	}
 	return (i == 0 ? 0 : 1);
-}
-
-int		add_path(t_flag flag, t_path **path, char *arg)
-{
-	t_path *new;
-
-	if (!(new = (t_path *)malloc(sizeof(*new))))
-		return (0);
-	new->p_name = ft_strdup(arg);
-	new->next = NULL;
-	new->file = NULL;
-	if (*path == NULL)
-		*path = new;
-	else
-		sort_path(flag, *path, new);
-	return (1);
+	set_sorting_funct(flag);
 }
