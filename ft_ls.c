@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 12:57:57 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/19 15:49:30 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ void	init_flag_struct(t_flag *flag)
 	flag->file = NULL;
 }
 
-t_path	*read_args(int ac, char **av, t_flag *flag)
+int		read_args(int ac, char **av, t_flag *flag)
 {
 	int		i;
 	int		nb_path;
-	t_path	*path;
 
 	i = 1;
 	nb_path = 0;
-	path = NULL;
 	while (i < ac)
 	{
 		if (av[i][0] == '-' && nb_path == 0)
@@ -40,12 +38,12 @@ t_path	*read_args(int ac, char **av, t_flag *flag)
 		else if (av[i][0] != '-' && ++nb_path)
 			add_path(flag, av[i]);
 		else
-			return (NULL);
+			return (0);
 		i++;
 	}
 	if (!(nb_path))
 		add_path(flag, ".");
-	return (path);
+	return (1);
 }
 
 int		main(int ac, char **av)
@@ -53,12 +51,13 @@ int		main(int ac, char **av)
 	t_flag	flag;
 
 	init_flag_struct(&flag);
-	if (!(path = read_args(ac, av, &flag)))
+	if (!(read_args(ac, av, &flag)))
 		return (-1);
-	while (flag->path)
+	set_sorting_funct(&flag);
+	while (flag.path)
 	{
-		read_path(&flag, flag->path->p_name);
-		flag->path = flag->path->next;
+		read_path(&flag, flag.path->p_name);
+		flag.path = flag.path->next;
 	}
 	return (0);
 }

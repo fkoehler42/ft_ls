@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 13:01:46 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/19 15:38:52 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ typedef struct			s_file
 
 int				set_flags(char *arg, t_flag *flag);
 int				add_path(t_flag *flag, char *arg);
-int				add_file(t_flag *flag, char *file);
-int				read_path(t_flag flag, t_path *path, char *path_name);
+int				add_file(t_flag *flag, char *file, char *path_name);
+int				read_path(t_flag *flag, char *path_name);
 void			set_sorting_funct(t_flag *flag);
 void			sort_file(t_flag *flag, t_file *new);
 void			sort_path(t_flag *flag, t_path *new);
 int				lexicographical_order(char *s1, char *s2);
 int				rev_lexicographical_order(char *s1, char *s2);
-void			recursive_path(t_flag flag, t_path *path);
-void			print_files(t_path *path);
+void			recursive_path(t_flag *flag);
+void			print_files(t_flag *flag, char *path_name);
 void			perror(const char *s);
 
 #endif

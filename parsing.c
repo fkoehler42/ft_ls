@@ -6,18 +6,18 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 12:32:32 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/02/19 15:50:40 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	set_sorting_func(t_flag *flag)
+void	set_sorting_funct(t_flag *flag)
 {
 	if (flag->r)
 		flag->fptr = &rev_lexicographical_order;
 	else
-		path->fptr = &lexicographical_order;
+		flag->fptr = &lexicographical_order;
 }
 
 int		set_flags(char *arg, t_flag *flag)
@@ -42,5 +42,4 @@ int		set_flags(char *arg, t_flag *flag)
 		i++;
 	}
 	return (i == 0 ? 0 : 1);
-	set_sorting_funct(flag);
 }
