@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 15:24:48 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:53:57 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 12:12:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		read_path(t_flag *flag, char *path_name)
 	print_files(flag, path_name);
 	if (flag->rec)
 		recursive_path(flag);
+	delete_files_list(flag);
 	return (1);
 }
 

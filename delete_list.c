@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recursive.c                                        :+:      :+:    :+:   */
+/*   delete_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 12:46:10 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/03/02 10:40:57 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/03/02 10:56:12 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	recursive_path(t_flag *flag)
+void	delete_files_list(t_flag *flag)
 {
-	t_file 	*tmp;
-	struct 	stat buf;
+	t_file	*tmp1;
+	t_file	*tmp2;
 
-	tmp = flag->file;
-	while (tmp)
+	tmp1 = flag->file;
+	while (tmp1 != NULL)
 	{
-		if ((stat(tmp->f_path, &buf)) < 0)
-			return ;
-		if (S_ISDIR(buf.st_mode))
-			read_path(flag, tmp->f_path);
-		tmp = tmp->next;
+		tmp2 = tmp1->next;
+		free(tmp1->f_name);
+		free(tmp1->f_path);
+		free(tmp1);
+		tmp1 = tmp2;
 	}
+	flag->file = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:30:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:08:30 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 12:32:41 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void	sort_file(t_flag *flag, t_file *new)
 	t_file *tmp;
 
 	tmp = flag->file;
-	if ((flag->fptr(new->f_name, tmp->f_name)) <= 0)
+	if ((flag->fptr(new->f_path, tmp->f_path)) <= 0)
 	{
 		flag->file = new;
 		new->next = tmp;
 	}
 	else
 	{
-		while (tmp->next && ((flag->fptr(new->f_name, tmp->next->f_name)) > 0))
+		while (tmp->next && ((flag->fptr(new->f_path, tmp->next->f_path)) > 0))
 			tmp = tmp->next;
 		new->next = tmp->next;
 		tmp->next = new;

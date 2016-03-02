@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recursive.c                                        :+:      :+:    :+:   */
+/*   time_sorting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 12:46:10 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/03/02 12:28:20 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/03/02 12:46:18 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	recursive_path(t_flag *flag)
+int		time_order(char *s1, char *s2)
 {
-	t_file 	*tmp;
-	struct 	stat buf;
+	struct	stat buf1;
+	struct	stat buf2;
 
-	tmp = flag->file;
-	while (tmp)
-	{
-		if ((stat(tmp->f_path, &buf)) < 0)
-			return ;
-		if (S_ISDIR(buf.st_mode))
-			read_path(flag, tmp->f_path);
-		tmp = tmp->next;
-	}
+	if (((stat(s1, &buf1)) < 0) || ((stat(s2, &buf2)) < 0))
+		return (-1);
+	return (ft_strcmp())
 }

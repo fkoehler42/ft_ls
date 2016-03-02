@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:49:30 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 12:22:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->r = 0;
 	flag->rec = 0;
 	flag->t = 0;
-	flag->fptr = NULL;
+	flag->fptr = &lexicographical_order;
 	flag->path = NULL;
 	flag->file = NULL;
 }
@@ -53,7 +53,6 @@ int		main(int ac, char **av)
 	init_flag_struct(&flag);
 	if (!(read_args(ac, av, &flag)))
 		return (-1);
-	set_sorting_funct(&flag);
 	while (flag.path)
 	{
 		read_path(&flag, flag.path->p_name);

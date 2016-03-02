@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:50:40 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 12:23:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int		set_flags(char *arg, t_flag *flag)
 			return (0);
 		i++;
 	}
+	set_sorting_funct(flag);
 	return (i == 0 ? 0 : 1);
 }

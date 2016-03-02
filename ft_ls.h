@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:38:52 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 10:56:59 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int				lexicographical_order(char *s1, char *s2);
 int				rev_lexicographical_order(char *s1, char *s2);
 void			recursive_path(t_flag *flag);
 void			print_files(t_flag *flag, char *path_name);
+void			delete_files_list(t_flag *flag);
 void			perror(const char *s);
 
 #endif
