@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 12:23:47 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 13:39:15 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	set_sorting_funct(t_flag *flag)
 {
-	if (flag->r)
+	if (flag->r && flag->t)
+		flag->fptr = &rev_time_order;
+	else if (flag->t)
+		flag->fptr = &time_order;
+	else if (flag->r)
 		flag->fptr = &rev_lexicographical_order;
 	else
 		flag->fptr = &lexicographical_order;
