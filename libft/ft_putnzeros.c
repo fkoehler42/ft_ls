@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnstr.c                                       :+:      :+:    :+:   */
+/*   ft_putnzeros.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/28 14:33:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/08 16:17:12 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/01/28 14:38:24 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/02/02 19:19:40 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnstr(char const *s, int n)
+void	ft_putnzeros(int n)
 {
 	int	i;
 
 	i = 0;
 	while (i < n)
 	{
-		ft_putchar(s[i]);
+		ft_putchar('0');
 		i++;
 	}
 }

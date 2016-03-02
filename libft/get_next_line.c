@@ -6,11 +6,11 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 10:48:23 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/01/08 19:25:13 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:02:12 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
 void		check_link(int const fd, t_getline **link)
 {

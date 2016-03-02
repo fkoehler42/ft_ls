@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 13:39:37 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:12:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define FT_LS_H
 
 # include "libft/includes/libft.h"
+# include "libft/includes/ft_printf.h"
 # include <dirent.h>
 # include <sys/stat.h>
 # include <errno.h>
-# include <stdio.h>
 
-# define DEBUG printf("%s, %d\n", __FILE__, __LINE__)
+# define DEBUG ft_printf("%s, %d\n", __FILE__, __LINE__)
 
 typedef struct			s_flag
 {
@@ -58,7 +58,7 @@ int				rev_lexicographical_order(char *s1, char *s2);
 int				time_order(char *s1, char *s2);
 int				rev_time_order(char *s1, char *s2);
 void			recursive_path(t_flag *flag);
-void			print_files(t_flag *flag, char *path_name);
+void			print_files(t_flag *flag);
 void			delete_files_list(t_flag *flag);
 void			perror(const char *s);
 

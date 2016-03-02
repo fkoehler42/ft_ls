@@ -1,25 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnstr.c                                       :+:      :+:    :+:   */
+/*   count_char_decimal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/28 14:33:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/08 16:17:12 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/02/01 12:57:27 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/02/02 20:55:02 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnstr(char const *s, int n)
+int	count_char_signed_decimal_base(long long nb, unsigned int base)
 {
 	int	i;
 
 	i = 0;
-	while (i < n)
+	if (nb == 0)
+		return (1);
+	if (nb < 0)
+		i++;
+	while (nb != 0)
 	{
-		ft_putchar(s[i]);
+		nb = nb / base;
 		i++;
 	}
+	return (i);
+}
+
+int	count_char_usigned_decimal_base(unsigned long long nb, unsigned int base)
+{
+	int	i;
+
+	i = 0;
+	if (nb == 0)
+		return (1);
+	while (nb > 0)
+	{
+		nb = nb / base;
+		i++;
+	}
+	return (i);
 }

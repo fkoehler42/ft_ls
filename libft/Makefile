@@ -6,9 +6,11 @@
 #    By: fkoehler <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 18:34:40 by fkoehler          #+#    #+#              #
-#    Updated: 2016/01/28 14:36:24 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/02 17:50:37 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+vpath %.c ./ ./ft_printf
 
 SRC = ft_atoi.c \
 ft_bzero.c \
@@ -43,6 +45,8 @@ ft_putnbr.c \
 ft_putnbr_fd.c \
 ft_putstr.c \
 ft_putnstr.c \
+ft_putnspaces.c \
+ft_putnzeros.c \
 ft_putstr_fd.c \
 ft_replace_char.c \
 ft_strcat.c \
@@ -75,7 +79,31 @@ ft_strsub.c \
 ft_strtrim.c \
 ft_tolower.c \
 ft_toupper.c \
-get_next_line.c
+get_next_line.c \
+ft_printf.c \
+check_flags.c \
+check_format.c \
+check_modifiers.c \
+conv_wchar.c \
+count_bytes.c \
+count_char_decimal.c \
+ft_put_llong.c \
+ft_put_long.c \
+print.c \
+print_address.c \
+print_char.c \
+print_decimal.c \
+print_decimal1.c \
+print_decimal2.c \
+print_decimal3.c \
+print_hexa.c \
+print_hexa_upper.c \
+print_octal.c \
+print_percent.c \
+print_string.c \
+print_udecimal.c \
+print_wchar_string.c \
+
 
 NAME = libft.a
 

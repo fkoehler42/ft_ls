@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printing.c                                         :+:      :+:    :+:   */
+/*   ft_putnspaces.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/19 15:03:22 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/01/28 14:38:24 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/01/28 14:42:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "ft_printf.h"
 
-void	print_files(t_flag *flag, char *path_name)
+void	ft_putnspaces(int n)
 {
-	t_file	*tmp;
+	int	i;
 
-	tmp = flag->file;
-	ft_putstr(path_name);
-	ft_putendl(":");
-	while (tmp)
+	i = 0;
+	while (i < n)
 	{
-		ft_putendl(tmp->f_name);
-		tmp = tmp->next;
+		ft_putchar(' ');
+		i++;
 	}
-	ft_putchar('\n');
 }

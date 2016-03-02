@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnstr.c                                       :+:      :+:    :+:   */
+/*   print_percent.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/28 14:33:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/08 16:17:12 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/02/01 10:46:28 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/02/10 15:52:53 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnstr(char const *s, int n)
+void	print_percent(t_arg *arg)
 {
-	int	i;
-
-	i = 0;
-	while (i < n)
+	if (arg->minus && arg->width > 1)
 	{
-		ft_putchar(s[i]);
-		i++;
+		ft_putchar('%');
+		ft_putnspaces(arg->width - 1);
+		g_bytes += arg->width;
+	}
+	else if (arg->width > 1)
+	{
+		arg->zero ? ft_putnzeros(arg->width - 1) :
+		ft_putnspaces(arg->width - 1);
+		ft_putchar('%');
+		g_bytes += arg->width;
+	}
+	else
+	{
+		ft_putchar('%');
+		g_bytes++;
 	}
 }

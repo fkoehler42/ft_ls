@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 12:22:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 18:16:54 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int		main(int ac, char **av)
 	{
 		read_path(&flag, flag.path->p_name);
 		flag.path = flag.path->next;
+		if (flag.path)
+			ft_printf("\n%s:\n", flag.path->p_name);
 	}
 	return (0);
 }
