@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 18:12:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/02 19:45:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int				rev_time_order(char *s1, char *s2);
 void			recursive_path(t_flag *flag);
 void			print_files(t_flag *flag);
 void			delete_files_list(t_flag *flag);
+int				count_blocks(t_flag *flag);
 void			perror(const char *s);
 
 #endif
