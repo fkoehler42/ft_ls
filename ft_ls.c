@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 18:57:58 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 10:45:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,6 @@ void	init_flag_struct(t_flag *flag)
 	flag->fptr = &lexicographical_order;
 	flag->path = NULL;
 	flag->file = NULL;
-}
-
-int		read_args(int ac, char **av, t_flag *flag)
-{
-	int		i;
-	int		nb_path;
-
-	i = 1;
-	nb_path = 0;
-	while (i < ac)
-	{
-		if (av[i][0] == '-' && nb_path == 0)
-			set_flags(av[i] + 1, flag);
-		else if (av[i][0] != '-' && ++nb_path)
-			add_path(flag, av[i]);
-		else
-			return (0);
-		i++;
-	}
-	if (!(nb_path++))
-		add_path(flag, ".");
-	return (nb_path);
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 19:45:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 11:37:41 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
+void			perror(const char *s);
+int				read_args(int ac, char **av, t_flag *flag);
 int				set_flags(char *arg, t_flag *flag);
 int				add_path(t_flag *flag, char *arg);
 int				add_file(t_flag *flag, char *file, char *path_name);
@@ -58,9 +60,12 @@ int				rev_lexicographical_order(char *s1, char *s2);
 int				time_order(char *s1, char *s2);
 int				rev_time_order(char *s1, char *s2);
 void			recursive_path(t_flag *flag);
-void			print_files(t_flag *flag);
 void			delete_files_list(t_flag *flag);
+
 int				count_blocks(t_flag *flag);
-void			perror(const char *s);
+void			print_files(t_flag *flag);
+void			print_files_infos(t_flag *flag);
+void			print_file_type(struct stat file);
+void			print_owner_perms(struct stat file);
 
 #endif
