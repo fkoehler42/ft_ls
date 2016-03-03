@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 17:01:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 18:41:46 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 19:23:54 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	print_file_time(struct stat file)
 	file_time = ctime(&file.st_mtime);
 	if (!file_time)
 		file_time = ctime(&file.st_mtimespec.tv_sec);
-	if ((current_time - file.st_mtime) > 15724800)
+	if ((current_time - file.st_mtime) > 15811200)
 	{
-		tmp1 = ft_strsub(file_time, 4, 6);
+		tmp1 = ft_strsub(file_time, 4, 7);
 		tmp2 = ft_strsub(file_time, 20, 4);
 		cut_time = ft_strjoin(tmp1, tmp2);
 		free(tmp1);

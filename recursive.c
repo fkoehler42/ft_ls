@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 18:16:12 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 19:32:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	recursive_path(t_flag *flag)
 	tmp = flag->file;
 	while (tmp)
 	{
-		if ((stat(tmp->f_path, &buf)) < 0)
+		if ((lstat(tmp->f_path, &buf)) < 0)
 			return ;
 		if (flag->a && (S_ISDIR(buf.st_mode)))
 		{

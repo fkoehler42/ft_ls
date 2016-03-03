@@ -1,45 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   file_type.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 19:21:25 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 17:39:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_files(t_flag *flag)
+void	print_file_type(struct stat file)
 {
-	t_file	*tmp;
-
-	tmp = flag->file;
-	if (flag->l)
-		ft_printf("total %d\n", count_blocks(flag));
-	while (tmp)
-	{
-		if (flag->l)
-			print_files_infos(tmp);
-		ft_putendl(tmp->f_name);
-		tmp = tmp->next;
-	}
-}
-
-void	print_files_infos(t_file *file)
-{
-	struct	stat buf;
-
-		if ((lstat(file->f_path, &buf)) < 0)
-			return ;
-		print_file_type(buf);
-		print_owner_perms(buf);
-		print_group_perms(buf);
-		print_other_perms(buf);
-		ft_printf("%3d ", buf.st_nlink);
-		print_user_and_group(buf);
-		ft_printf("%7d ", buf.st_size);
-		print_file_time(buf);
+	if (S_ISBLK(file.st_mode))
+		ft_putchar('b');
+	else if (S_ISCHR(file.st_mode))
+		ft_putchar('c');
+	else if (S_ISDIR(file.st_mode))
+		ft_putchar('d');
+	else if (S_ISLNK(file.st_mode))
+		ft_putchar('l');
+	else if (S_ISSOCK(file.st_mode))
+		ft_putchar('s');
+	else if (S_ISFIFO(file.st_mode))
+		ft_putchar('p');
+	else
+		ft_putchar('-');
 }
