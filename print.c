@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 16:31:58 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 17:40:28 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	print_files_infos(t_flag *flag)
 		ft_printf("%3d ", buf.st_nlink);
 		print_user_and_group(buf);
 		ft_printf("%7d ", buf.st_size);
+		print_file_time(buf);
 		ft_putendl(tmp->f_name);
 		tmp = tmp->next;
 	}
