@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 11:37:41 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 16:23:44 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "libft/includes/ft_printf.h"
 # include <dirent.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <pwd.h>
+# include <grp.h>
 # include <errno.h>
 
 # define DEBUG ft_printf("%s, %d\n", __FILE__, __LINE__)
@@ -67,5 +70,8 @@ void			print_files(t_flag *flag);
 void			print_files_infos(t_flag *flag);
 void			print_file_type(struct stat file);
 void			print_owner_perms(struct stat file);
+void			print_group_perms(struct stat file);
+void			print_other_perms(struct stat file);
+void			print_user_and_group(struct stat file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 11:36:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/03 15:48:11 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		count_blocks(t_flag *flag)
 	tmp = flag->file;
 	while (tmp)
 	{
-		if ((stat(tmp->f_path, &buf)) < 0)
+		if ((lstat(tmp->f_path, &buf)) < 0)
 			return (-1);
 		blocks += buf.st_blocks;
 		tmp = tmp->next;
