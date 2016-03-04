@@ -30,15 +30,12 @@ int		main(int ac, char **av)
 	t_flag	flag;
 
 	init_flag_struct(&flag);
-	if (!(nb_path = (read_args(ac, av, &flag))))
-		return (-1);
+	nb_path = read_args(ac, av, &flag);
 	while (flag.path)
 	{
-		if (nb_path > 1)
-			ft_printf("%s:\n", flag.path->p_name);
-		read_path(&flag, flag.path->p_name);
-		if (flag.path->next)
-			ft_putchar('\n');
+		read_path(&flag, flag.path->p_name, nb_path);
+		//if (flag.path->next)
+			//ft_putchar('\n');
 		flag.path = flag.path->next;
 	}
 	return (0);

@@ -17,7 +17,7 @@ void	print_files(t_flag *flag)
 	t_file	*tmp;
 
 	tmp = flag->file;
-	if (flag->l)
+	if (flag->l && (ft_strcmp(tmp->f_name, tmp->f_path) != 0))
 		ft_printf("total %d\n", count_blocks(flag));
 	while (tmp)
 	{
@@ -33,7 +33,7 @@ void	print_files_infos(t_file *file)
 	struct	stat buf;
 
 		if ((lstat(file->f_path, &buf)) < 0)
-			return ;
+			perror("ft_ls");
 		print_file_type(buf);
 		print_owner_perms(buf);
 		print_group_perms(buf);
@@ -41,5 +41,5 @@ void	print_files_infos(t_file *file)
 		ft_printf("%3d ", buf.st_nlink);
 		print_user_and_group(buf);
 		ft_printf("%7d ", buf.st_size);
-		print_file_time(buf);
+		//print_file_time(buf);
 }

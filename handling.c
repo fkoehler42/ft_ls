@@ -17,15 +17,21 @@ int		add_file(t_flag *flag, char *file, char *path_name)
 	t_file	*new;
 	char	*tmp;
 
+	tmp = NULL;
 	if (!(flag->a) && file[0] == '.')
 		return (1);
 	if (!(new = (t_file *)malloc(sizeof(*new))))
 		return (0);
 	new->f_name = ft_strdup(file);
 	new->next = NULL;
-	tmp = ft_strjoin(path_name, "/");
-	new->f_path = ft_strjoin(tmp, file);
-	free(tmp);
+	if (!path_name[0])
+		new->f_path = ft_strdup(file);
+	else
+	{
+		tmp = ft_strjoin(path_name, "/");
+		new->f_path = ft_strjoin(tmp, file);
+		free(tmp);
+	}
 	if (flag->file == NULL)
 		flag->file = new;
 	else
@@ -33,14 +39,19 @@ int		add_file(t_flag *flag, char *file, char *path_name)
 	return (1);
 }
 
-int		read_path(t_flag *flag, char *path_name)
+int		read_path(t_flag *flag, char *path_name, int nb_path)
 {
 	DIR	*dirp;
 	struct dirent *file;
 
 	flag->file = NULL;
-	if ((dirp = opendir(path_name)) == NULL)
-		return (0);
+	if (!(dirp = opendir(path_name)))
+	{
+		ft_printf("ft_ls: %s: %s\n", path_name, (strerror(errno)));
+		return (-1);
+	}
+	if (nb_path > 1)
+		ft_printf("\n%s:\n", path_name);
 	while ((file = readdir(dirp)) != NULL)
 		add_file(flag, file->d_name, path_name);
 	closedir(dirp);
@@ -48,7 +59,7 @@ int		read_path(t_flag *flag, char *path_name)
 	if (flag->rec)
 		recursive_path(flag);
 	delete_files_list(flag);
-	return (1);
+	return (0);
 }
 
 int		add_path(t_flag *flag, char *arg)

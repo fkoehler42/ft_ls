@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,19 +11,18 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
 void	parse_arg(t_flag *flag, char *arg)
 {
 	struct	stat buf;
 
-	if ((lstat(arg, &buf)) > 0)
-		perror("ft_ls");
+	if ((lstat(arg, &buf)) < 0)
+		ft_printf("ft_ls: %s: %s\n", arg, strerror(errno));
 	else if (S_ISDIR(buf.st_mode))
 		add_path(flag, arg);
 	else
-		add_file(flag, arg, ".");
+		add_file(flag, arg, "");
 }
-
+/*
 void	set_sorting_funct(t_flag *flag)
 {
 	if (flag->r && flag->t)
@@ -35,7 +34,7 @@ void	set_sorting_funct(t_flag *flag)
 	else
 		flag->fptr = &lexicographical_order;
 }
-
+*/
 int		set_flags(char *arg, t_flag *flag)
 {
 	int	i;
@@ -57,7 +56,7 @@ int		set_flags(char *arg, t_flag *flag)
 			return (0);
 		i++;
 	}
-	set_sorting_funct(flag);
+	//set_sorting_funct(flag);
 	return (i == 0 ? 0 : 1);
 }
 
@@ -73,12 +72,17 @@ int		read_args(int ac, char **av, t_flag *flag)
 		if (av[i][0] == '-' && nb_path == 0)
 			set_flags(av[i] + 1, flag);
 		else if (av[i][0] != '-' && ++nb_path)
-			add_path(flag, av[i]);
+			parse_arg(flag, av[i]);
 		else
 			return (0);
 		i++;
 	}
-	if (!nb_path)
+	if (flag->file)
+	{
+		print_files(flag);
+		delete_files_list(flag);
+	}
+	else if (!nb_path)
 	{
 		add_path(flag, ".");
 		nb_path++;

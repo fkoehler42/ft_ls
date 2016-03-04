@@ -50,12 +50,13 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
+void				perror(const char *s);
 int				read_args(int ac, char **av, t_flag *flag);
 void			parse_arg(t_flag *flag, char *arg);
 int				set_flags(char *arg, t_flag *flag);
 int				add_path(t_flag *flag, char *arg);
 int				add_file(t_flag *flag, char *file, char *path_name);
-int				read_path(t_flag *flag, char *path_name);
+int				read_path(t_flag *flag, char *path_name, int nb_path);
 void			set_sorting_funct(t_flag *flag);
 void			sort_file(t_flag *flag, t_file *new);
 void			sort_path(t_flag *flag, t_path *new);

@@ -28,13 +28,13 @@ void	recursive_path(t_flag *flag)
 				&& ((ft_strcmp("..", tmp->f_name)) != 0))
 			{
 				ft_printf("\n%s:\n", tmp->f_path);
-				read_path(flag, tmp->f_path);
+				read_path(flag, tmp->f_path, 2);
 			}
 		}
 		else if (S_ISDIR(buf.st_mode))
 		{
 			ft_printf("\n%s\n", tmp->f_path);
-			read_path(flag, tmp->f_path);
+			read_path(flag, tmp->f_path, 2);
 		}
 		tmp = tmp->next;
 	}
