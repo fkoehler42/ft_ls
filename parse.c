@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 18:32:02 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 20:55:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ void	parse_arg(t_flag *flag, char *arg)
 
 void	set_sorting_funct(t_flag *flag)
 {
+	flag->fptr1 = NULL;
+	flag->fptr2 = NULL;
 	if (flag->r && flag->t)
-		flag->fptr = &rev_time_order;
+		flag->fptr2 = &rev_time_order;
 	else if (flag->t)
-		flag->fptr = &time_order;
+		flag->fptr2 = &time_order;
 	else if (flag->r)
-		flag->fptr = &rev_lexico_order;
+		flag->fptr1 = &rev_lexico_order;
 	else
-		flag->fptr = &lexico_order;
+		flag->fptr1 = &lexico_order;
 }
 
 int		set_flags(char *arg, t_flag *flag)
@@ -66,7 +68,8 @@ int		set_flags(char *arg, t_flag *flag)
 			return (0);
 		i++;
 	}
-	set_sorting_funct(flag);
+	if (flag->r || flag->t)
+		set_sorting_funct(flag);
 	return (i == 0 ? 0 : 1);
 }
 
@@ -88,10 +91,7 @@ int		read_args(int ac, char **av, t_flag *flag)
 		i++;
 	}
 	if (flag->file)
-	{
 		print_files(flag);
-		delete_files_list(flag);
-	}
 	else if (!nb_path)
 	{
 		add_path(flag, ".");

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 18:06:05 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 21:27:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	print_files_infos(t_file *file)
 	char	link_target[1024];
 
 	ft_bzero(link_target, 1024);
-	print_file_type(file->stat);
-	print_owner_perms(file->stat);
-	print_group_perms(file->stat);
-	print_other_perms(file->stat);
+	print_file_type(&file->stat);
+	print_owner_perms(&file->stat);
+	print_group_perms(&file->stat);
+	print_other_perms(&file->stat);
 	ft_printf("%3d ", file->stat.st_nlink);
-	print_user_and_group(file->stat);
+	print_user_and_group(&file->stat);
 	ft_printf("%7d ", file->stat.st_size);
-	print_file_time(file->stat);
+	print_file_time(&file->stat);
 	if (S_ISLNK(file->stat.st_mode))
 	{
 		if (readlink(file->f_path, link_target, 1023) < 0)

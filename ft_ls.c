@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 17:23:26 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 20:52:38 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	init_flag_struct(t_flag *flag)
 	flag->r = 0;
 	flag->rec = 0;
 	flag->t = 0;
-	flag->fptr = &lexico_order;
+	flag->fptr1 = &lexico_order;
+	flag->fptr2 = NULL;
 	flag->path = NULL;
 	flag->file = NULL;
 }
@@ -35,7 +36,12 @@ int		main(int ac, char **av)
 	tmp = flag.path;
 	while (tmp)
 	{
-		if (nb_path > 1)
+		if (nb_path > 1 && flag.file)
+		{
+			delete_files_list(&flag);
+			ft_printf("\n%s:\n", tmp->p_name);
+		}
+		else if (nb_path > 1)
 			ft_printf("%s:\n", tmp->p_name);
 		read_path(&flag, tmp->p_name);
 		tmp = tmp->next;
