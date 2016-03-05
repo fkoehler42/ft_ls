@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 15:46:08 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 11:31:50 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ int		main(int ac, char **av)
 {
 	int		nb_path;
 	t_flag	flag;
+	t_path	*tmp;
 
 	init_flag_struct(&flag);
 	nb_path = read_args(ac, av, &flag);
-	while (flag.path)
+	tmp = flag.path;
+	while (tmp)
 	{
-		read_path(&flag, flag.path->p_name, nb_path);
-		//if (flag.path->next)
-			//ft_putchar('\n');
-		flag.path = flag.path->next;
+		if (nb_path > 1)
+			ft_printf("%s:\n", tmp->p_name);
+		read_path(&flag, tmp->p_name);
+		tmp = tmp->next;
+		if (tmp)
+			ft_putchar('\n');
 	}
+	delete_paths_list(&flag);
 	return (0);
 }

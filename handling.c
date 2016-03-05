@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 15:24:48 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 18:09:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 12:30:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,22 @@ int		add_file(t_flag *flag, char *file, char *path_name)
 	return (1);
 }
 
-int		read_path(t_flag *flag, char *path_name, int nb_path)
+int		read_path(t_flag *flag, char *path_name)
 {
-	DIR	*dirp;
-	struct dirent *file;
+	DIR		*dirp;
+	struct	dirent *file;
+	char	*cut_path;
 
 	flag->file = NULL;
 	if (!(dirp = opendir(path_name)))
 	{
-		ft_printf("ft_ls: %s: %s\n", path_name, (strerror(errno)));
+		ft_putstr_fd("ft_ls: ", 2);
+		(cut_path = (ft_strrchr(path_name, '/'))) ?
+		ft_putstr_fd(++cut_path, 2) : ft_putstr_fd(path_name, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
 		return (-1);
 	}
-	if (nb_path > 1)
-		ft_printf("\n%s:\n", path_name);
 	while ((file = readdir(dirp)) != NULL)
 		add_file(flag, file->d_name, path_name);
 	closedir(dirp);

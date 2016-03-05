@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 20:18:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 11:41:30 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ void	parse_arg(t_flag *flag, char *arg)
 	struct	stat buf;
 
 	if ((lstat(arg, &buf)) < 0)
-		ft_printf("ft_ls: %s: %s\n", arg, strerror(errno));
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+	}
 	else if (S_ISDIR(buf.st_mode))
 		add_path(flag, arg);
 	else
 		add_file(flag, arg, "");
 }
-/*
+
 void	set_sorting_funct(t_flag *flag)
 {
 	if (flag->r && flag->t)
@@ -34,7 +39,7 @@ void	set_sorting_funct(t_flag *flag)
 	else
 		flag->fptr = &lexicographical_order;
 }
-*/
+
 int		set_flags(char *arg, t_flag *flag)
 {
 	int	i;
@@ -56,7 +61,7 @@ int		set_flags(char *arg, t_flag *flag)
 			return (0);
 		i++;
 	}
-	//set_sorting_funct(flag);
+	set_sorting_funct(flag);
 	return (i == 0 ? 0 : 1);
 }
 

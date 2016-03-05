@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/03 19:21:25 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 14:02:52 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	print_files(t_flag *flag)
 	{
 		if (flag->l)
 			print_files_infos(tmp);
-		ft_putendl(tmp->f_name);
+		else
+			ft_putendl(tmp->f_name);
 		tmp = tmp->next;
 	}
 }
@@ -31,15 +32,24 @@ void	print_files(t_flag *flag)
 void	print_files_infos(t_file *file)
 {
 	struct	stat buf;
+	char	link_target[1024];
 
-		if ((lstat(file->f_path, &buf)) < 0)
+	ft_bzero(link_target, 1024);
+	lstat(file->f_path, &buf);
+	print_file_type(buf);
+	print_owner_perms(buf);
+	print_group_perms(buf);
+	print_other_perms(buf);
+	ft_printf("%3d ", buf.st_nlink);
+	print_user_and_group(buf);
+	ft_printf("%7d ", buf.st_size);
+	print_file_time(buf);
+	if (S_ISLNK(buf.st_mode))
+	{
+		if (readlink(file->f_path, link_target, sizeof(link_target)) < 0)
 			perror("ft_ls");
-		print_file_type(buf);
-		print_owner_perms(buf);
-		print_group_perms(buf);
-		print_other_perms(buf);
-		ft_printf("%3d ", buf.st_nlink);
-		print_user_and_group(buf);
-		ft_printf("%7d ", buf.st_size);
-		//print_file_time(buf);
+		ft_printf("%s -> %s\n", file->f_name, link_target);
+	}
+	else
+		ft_putendl(file->f_name);
 }

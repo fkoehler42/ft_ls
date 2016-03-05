@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 10:40:57 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 10:56:12 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 11:30:55 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,20 @@ void	delete_files_list(t_flag *flag)
 		tmp1 = tmp2;
 	}
 	flag->file = NULL;
+}
+
+void	delete_paths_list(t_flag *flag)
+{
+	t_path	*tmp1;
+	t_path	*tmp2;
+
+	tmp1 = flag->path;
+	while (tmp1 != NULL)
+	{
+		tmp2 = tmp1->next;
+		free(tmp1->p_name);
+		free(tmp1);
+		tmp1 = tmp2;
+	}
+	flag->path = NULL;
 }
