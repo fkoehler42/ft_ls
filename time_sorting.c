@@ -6,38 +6,30 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 12:28:20 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 12:09:05 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 17:16:23 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		time_order(char *s1, char *s2)
+int		time_order(char *s1, char *s2, struct stat f1, struct stat f2)
 {
-	struct	stat buf1;
-	struct	stat buf2;
 	long	diff;
 
-	lstat(s1, &buf1);
-	lstat(s2, &buf2);
-	if ((diff = (buf2.st_mtime - buf1.st_mtime)) != 0)
+	if ((diff = (f2.st_mtime - f1.st_mtime)) != 0)
 		return (diff);
-	if ((diff = (buf2.st_mtimespec.tv_nsec - buf1.st_mtimespec.tv_nsec)) != 0)
+	if ((diff = (f2.st_mtimespec.tv_nsec - f1.st_mtimespec.tv_nsec)) != 0)
 		return (diff);
 	return (ft_strcmp(s1, s2));
 }
 
-int		rev_time_order(char *s1, char *s2)
+int		rev_time_order(char *s1, char *s2, struct stat f1, struct stat f2)
 {
-	struct	stat buf1;
-	struct	stat buf2;
 	long	diff;
 
-	if (((stat(s1, &buf1)) < 0) || ((stat(s2, &buf2)) < 0))
-		return (-1);
-	if ((diff = (buf1.st_mtime - buf2.st_mtime)) != 0)
+	if ((diff = (f1.st_mtime - f2.st_mtime)) != 0)
 		return (diff);
-	if ((diff = (buf1.st_mtimespec.tv_nsec - buf2.st_mtimespec.tv_nsec)) != 0)
+	if ((diff = (f1.st_mtimespec.tv_nsec - f2.st_mtimespec.tv_nsec)) != 0)
 		return (diff);
 	return (ft_strcmp(s2, s1));
 }

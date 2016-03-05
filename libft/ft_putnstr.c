@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:33:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/08 16:17:12 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 15:46:09 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 void	ft_putnstr(char const *s, int n)
 {
-	int	i;
-
-	i = 0;
-	while (i < n)
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
+	write(1, s, n);
 }

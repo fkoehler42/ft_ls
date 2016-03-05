@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 11:31:50 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 17:23:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->r = 0;
 	flag->rec = 0;
 	flag->t = 0;
-	flag->fptr = &lexicographical_order;
+	flag->fptr = &lexico_order;
 	flag->path = NULL;
 	flag->file = NULL;
 }

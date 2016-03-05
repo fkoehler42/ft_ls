@@ -6,24 +6,29 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 11:41:30 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 18:32:02 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 void	parse_arg(t_flag *flag, char *arg)
 {
-	struct	stat buf;
+	struct stat buf;
 
 	if ((lstat(arg, &buf)) < 0)
 	{
 		ft_putstr_fd("ft_ls: ", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd(strerror(errno), 2);
+		perror(arg);
 	}
 	else if (S_ISDIR(buf.st_mode))
 		add_path(flag, arg);
+	else if (S_ISLNK(buf.st_mode))
+	{
+		if ((stat(arg, &buf)) < 0)
+			add_file(flag, arg, "");
+		else
+			add_path(flag, arg);
+	}
 	else
 		add_file(flag, arg, "");
 }
@@ -35,9 +40,9 @@ void	set_sorting_funct(t_flag *flag)
 	else if (flag->t)
 		flag->fptr = &time_order;
 	else if (flag->r)
-		flag->fptr = &rev_lexicographical_order;
+		flag->fptr = &rev_lexico_order;
 	else
-		flag->fptr = &lexicographical_order;
+		flag->fptr = &lexico_order;
 }
 
 int		set_flags(char *arg, t_flag *flag)

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 11:23:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/05 16:53:06 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 void	recursive_path(t_flag *flag)
 {
 	t_file 	*tmp;
-	struct 	stat buf;
 
 	tmp = flag->file;
 	while (tmp)
 	{
-		if ((lstat(tmp->f_path, &buf)) < 0)
-			return ;
-		if (flag->a && (S_ISDIR(buf.st_mode)))
+		if (flag->a && (S_ISDIR(tmp->stat.st_mode)))
 		{
 			if (((ft_strcmp(".", tmp->f_name)) != 0)
 				&& ((ft_strcmp("..", tmp->f_name)) != 0))
@@ -31,7 +28,7 @@ void	recursive_path(t_flag *flag)
 				read_path(flag, tmp->f_path);
 			}
 		}
-		else if (S_ISDIR(buf.st_mode))
+		else if (S_ISDIR(tmp->stat.st_mode))
 		{
 			ft_printf("\n%s:\n", tmp->f_path);
 			read_path(flag, tmp->f_path);
