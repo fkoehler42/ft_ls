@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 12:43:11 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 15:30:10 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ void	parse_arg(t_flag *flag, char *arg)
 int		read_args(int ac, char **av, t_flag *flag)
 {
 	int		i;
+	int		double_minus;
 	int		nb_path;
 
 	i = 1;
+	double_minus = 0;
 	nb_path = 0;
 	while (i < ac)
 	{
-		if (!(nb_path == 0 && (ft_strcmp(av[i], "--") == 0)))
-		{
-			if (av[i][0] == '-' && av[i][1] && nb_path == 0
-				&& (ft_strcmp(av[1], "--") != 0))
-				set_flags(av[i] + 1, flag);
-			else if (++nb_path)
-				parse_arg(flag, av[i]);
-		}
+		if ((ft_strcmp(av[i], "--") == 0) && (!nb_path) && (!double_minus))
+			double_minus++;
+		else if (av[i][0] == '-' && av[i][1] && (!nb_path) && (!double_minus))
+			set_flags(av[i] + 1, flag);
+		else if (++nb_path)
+			parse_arg(flag, av[i]);
 		i++;
 	}
 	if (flag->file)

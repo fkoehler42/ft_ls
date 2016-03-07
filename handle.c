@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 15:24:48 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 13:13:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 16:26:48 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		add_file(t_flag *flag, char *file, char *path_name)
 		new->f_path = ft_strjoin(tmp, file);
 		free(tmp);
 	}
-	lstat(new->f_path, &new->stat);
+	if (flag->l)
+		add_file_infos(flag, new);
 	flag->file == NULL ? flag->file = new : sort_file1(flag, new);
 	return (0);
 }

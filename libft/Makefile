@@ -6,7 +6,7 @@
 #    By: fkoehler <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 18:34:40 by fkoehler          #+#    #+#              #
-#    Updated: 2016/03/02 17:50:37 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/07 14:31:43 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,6 @@ ft_toupper.c \
 get_next_line.c \
 ft_printf.c \
 check_flags.c \
-check_format.c \
 check_modifiers.c \
 conv_wchar.c \
 count_bytes.c \

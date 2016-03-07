@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 11:29:10 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 17:23:31 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	print_files(t_flag *flag)
 	while (tmp)
 	{
 		if (flag->l)
-			print_files_infos(tmp);
+			print_files_infos(flag, tmp);
 		else
 			ft_putendl(tmp->f_name);
 		tmp = tmp->next;
 	}
 }
 
-void	print_files_infos(t_file *file)
+void	print_files_infos(t_flag *flag, t_file *file)
 {
 	char	link_target[1024];
 
@@ -39,9 +39,11 @@ void	print_files_infos(t_file *file)
 	print_owner_perms(&file->stat);
 	print_group_perms(&file->stat);
 	print_other_perms(&file->stat);
-	ft_printf("%3d ", file->stat.st_nlink);
-	print_user_and_group(&file->stat);
-	ft_printf("%7d ", file->stat.st_size);
+	ft_printf("%*d ", (flag->max_char_link + 2), file->stat.st_nlink);
+	//print_user_and_group(&file->stat);
+	ft_printf("%-*s", (flag->max_char_owner + 2), file->owner);
+	ft_printf("%-*s", (flag->max_char_group + 2), file->group);
+	ft_printf("%*d ", flag->max_char_size, file->stat.st_size);
 	print_file_time(&file->stat);
 	if (S_ISLNK(file->stat.st_mode))
 	{

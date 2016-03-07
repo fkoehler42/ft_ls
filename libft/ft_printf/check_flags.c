@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/16 19:19:36 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/01/28 15:17:46 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 14:22:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,38 @@ int		check_flags(char *argument, t_arg *arg)
 	return (i);
 }
 
-int		check_width(char *argument, t_arg *arg, int i)
+int		check_width(va_list ap, char *argument, t_arg *arg, int i)
 {
 	if (ft_strchr_count(argument, '.') > 1)
 		return (-1);
-	while (ft_isdigit(argument[i]))
+	else if (argument[i] == '*' && ++i)
+		arg->width = va_arg(ap, int);
+	else
 	{
-		arg->width = (arg->width * 10) + (argument[i] - 48);
-		i++;
+		while (ft_isdigit(argument[i]))
+		{
+			arg->width = (arg->width * 10) + (argument[i] - 48);
+			i++;
+		}
 	}
 	return (i);
 }
 
-int		check_precision(char *argument, t_arg *arg, int i)
+int		check_precision(va_list ap, char *argument, t_arg *arg, int i)
 {
 	if (argument[i] == '.')
 	{
 		arg->precision++;
 		i++;
-		while (ft_isdigit(argument[i]))
+		if (argument[i] == '*' && ++i)
+			arg->precision = va_arg(ap, int);
+		else
 		{
-			arg->precision = (arg->precision * 10) + (argument[i] - 48);
-			i++;
+			while (ft_isdigit(argument[i]))
+			{
+				arg->precision = (arg->precision * 10) + (argument[i] - 48);
+				i++;
+			}
 		}
 	}
 	return (i);

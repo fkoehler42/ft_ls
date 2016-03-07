@@ -6,7 +6,7 @@
 /*   By: fkoehler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:21:41 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 17:52:53 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 14:32:17 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ void				ft_put_ullong_base(unsigned long long n, unsigned int base);
 void				ft_put_ullong_base_upper(unsigned long long n,
 					unsigned int base);
 
-int					check_format(const char *format);
 int					print_format(va_list ap, const char *format);
-int					check_struct(t_arg *arg);
-int					check_arg(const char *format, int start);
 int					set_arg(va_list ap, const char *format, int start);
 void				init_struct(t_arg *arg);
-int					store_arg(char *argument, t_arg *arg);
+int					store_arg(va_list ap, char *argument, t_arg *arg);
 int					check_flags(char *argument, t_arg *arg);
-int					check_width(char *argument, t_arg *arg, int i);
-int					check_precision(char *argument, t_arg *arg, int i);
+int					check_width(va_list ap, char *argument, t_arg *arg, int i);
+int					check_precision(va_list ap, char *argument,
+					t_arg *arg, int i);
 int					check_l_modifier(char *argument, t_arg *arg, int i);
 int					check_h_modifier(char *argument, t_arg *arg, int i);
 int					check_j_modifier(char *argument, t_arg *arg, int i);

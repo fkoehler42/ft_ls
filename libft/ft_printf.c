@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:13:21 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:07:14 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 14:43:31 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		store_arg(char *argument, t_arg *arg)
+int		store_arg(va_list ap, char *argument, t_arg *arg)
 {
 	int		i;
 
@@ -20,8 +20,8 @@ int		store_arg(char *argument, t_arg *arg)
 	arg->letter = argument[i];
 	if ((i = check_flags(argument, arg)) == -1)
 		return (-1);
-	i = check_width(argument, arg, i);
-	i = check_precision(argument, arg, i);
+	i = check_width(ap, argument, arg, i);
+	i = check_precision(ap, argument, arg, i);
 	if ((i = check_l_modifier(argument, arg, i)) == -1)
 		return (-1);
 	if ((i = check_h_modifier(argument, arg, i)) == -1)
@@ -32,7 +32,7 @@ int		store_arg(char *argument, t_arg *arg)
 		return (-1);
 	if (argument[i] != arg->letter)
 		return (-1);
-	if (check_struct(arg) == -1)
+	if ((arg->l + arg->ll + arg->h + arg->hh + arg->j + arg->z) > 1)
 		return (-1);
 	return (0);
 }
@@ -71,12 +71,12 @@ int		set_arg(va_list ap, const char *format, int start)
 			argument = ft_strsub(format, start, i - start + 1);
 			arg_len = ft_strlen(argument);
 			init_struct(&arg);
-			store_arg(argument, &arg);
+			store_arg(ap, argument, &arg);
 			free(argument);
 			print_arg(ap, &arg);
 			return (arg_len);
 		}
-		else if (ft_strchr("0123456789 .-+#lhzj", format[i]) == NULL)
+		else if (ft_strchr("0123456789 .*-+#lhzj", format[i]) == NULL)
 			return (format[start] == ' ' ? 1 : 0);
 		i++;
 	}

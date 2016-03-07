@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:30:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 21:12:42 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 15:55:55 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	sort_file1(t_flag *flag, t_file *new)
 	else
 	{
 		tmp = flag->file;
-		if ((flag->fptr1(new->f_path, tmp->f_path)) <= 0)
+		if ((flag->fptr1(new->f_name, tmp->f_name)) <= 0)
 		{
 			flag->file = new;
 			new->next = tmp;
@@ -74,7 +74,7 @@ void	sort_file1(t_flag *flag, t_file *new)
 		else
 		{
 			while (tmp->next &&
-					((flag->fptr1(new->f_path, tmp->next->f_path)) > 0))
+					((flag->fptr1(new->f_name, tmp->next->f_name)) > 0))
 				tmp = tmp->next;
 			new->next = tmp->next;
 			tmp->next = new;
@@ -87,14 +87,14 @@ void	sort_file2(t_flag *flag, t_file *new)
 	t_file *tmp;
 
 	tmp = flag->file;
-	if ((flag->fptr2(new->f_path, tmp->f_path, &new->stat, &tmp->stat)) <= 0)
+	if ((flag->fptr2(new->f_name, tmp->f_name, &new->stat, &tmp->stat)) <= 0)
 	{
 		flag->file = new;
 		new->next = tmp;
 	}
 	else
 	{
-		while (tmp->next && ((flag->fptr2(new->f_path, tmp->next->f_path,
+		while (tmp->next && ((flag->fptr2(new->f_name, tmp->next->f_name,
 				&new->stat, &tmp->next->stat)) > 0))
 			tmp = tmp->next;
 		new->next = tmp->next;
