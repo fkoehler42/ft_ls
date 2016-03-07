@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 16:53:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 21:26:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	recursive_path(t_flag *flag)
 	t_file 	*tmp;
 
 	tmp = flag->file;
+	reset_field_widths(flag);
 	while (tmp)
 	{
 		if (flag->a && (S_ISDIR(tmp->stat.st_mode)))

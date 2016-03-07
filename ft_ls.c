@@ -6,11 +6,20 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 17:07:52 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 21:25:46 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	reset_field_widths(t_flag *flag)
+{
+	flag->max_char_link = 0;
+	flag->max_char_owner = 0;
+	flag->max_char_group = 0;
+	flag->max_char_size = 0;
+	flag->max_char_dev = 0;
+}
 
 void	init_flag_struct(t_flag *flag)
 {
@@ -23,6 +32,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->max_char_owner = 0;
 	flag->max_char_group = 0;
 	flag->max_char_size = 0;
+	flag->max_char_dev = 0;
 	flag->fptr1 = &lexico_order;
 	flag->fptr2 = NULL;
 	flag->path = NULL;
