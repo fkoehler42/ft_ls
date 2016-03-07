@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_flags.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 20:55:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/07 11:00:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-void	parse_arg(t_flag *flag, char *arg)
-{
-	struct stat buf;
-
-	if ((lstat(arg, &buf)) < 0)
-	{
-		ft_putstr_fd("ft_ls: ", 2);
-		perror(arg);
-	}
-	else if (S_ISDIR(buf.st_mode))
-		add_path(flag, arg);
-	else if (S_ISLNK(buf.st_mode))
-	{
-		if ((stat(arg, &buf)) < 0)
-			add_file(flag, arg, "");
-		else
-			add_path(flag, arg);
-	}
-	else
-		add_file(flag, arg, "");
-}
 
 void	set_sorting_funct(t_flag *flag)
 {
@@ -65,7 +44,7 @@ int		set_flags(char *arg, t_flag *flag)
 		else if (arg[i] == 't')
 			flag->t = 1;
 		else
-			return (0);
+			flag_error(arg[i]);
 		i++;
 	}
 	if (flag->r || flag->t)
@@ -73,29 +52,10 @@ int		set_flags(char *arg, t_flag *flag)
 	return (i == 0 ? 0 : 1);
 }
 
-int		read_args(int ac, char **av, t_flag *flag)
+void	flag_error(int c)
 {
-	int		i;
-	int		nb_path;
-
-	i = 1;
-	nb_path = 0;
-	while (i < ac)
-	{
-		if (av[i][0] == '-' && nb_path == 0)
-			set_flags(av[i] + 1, flag);
-		else if (av[i][0] != '-' && ++nb_path)
-			parse_arg(flag, av[i]);
-		else
-			return (0);
-		i++;
-	}
-	if (flag->file)
-		print_files(flag);
-	else if (!nb_path)
-	{
-		add_path(flag, ".");
-		nb_path++;
-	}
-	return (nb_path);
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\nusage: ft_ls [-alrRt] [file ...]\n", 2);
+	exit(EXIT_SUCCESS);
 }
