@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 21:28:06 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/08 20:44:59 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include "libft/includes/libft.h"
 # include "libft/includes/ft_printf.h"
+# include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/xattr.h>
+# include <sys/acl.h>
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
@@ -59,7 +62,6 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
-void			perror(const char *s);
 int				read_args(int ac, char **av, t_flag *flag);
 void			parse_arg(t_flag *flag, char *arg);
 int				set_flags(char *arg, t_flag *flag);
@@ -90,10 +92,10 @@ int				count_blocks(t_flag *flag);
 void			print_files(t_flag *flag);
 void			print_files_infos(t_flag *flag, t_file *file);
 void			print_file_type(struct stat *file);
+int				print_file_attr(t_file *file);
 void			print_file_size(t_flag *flag, struct stat *file);
 void			print_file_time(struct stat *file);
-void			print_owner_perms(struct stat *file);
-void			print_group_perms(struct stat *file);
-void			print_other_perms(struct stat *file);
+void			set_owner_and_group_perms(struct stat *file, char *perms);
+void			set_other_perms(struct stat *file, char *perms);
 
 #endif

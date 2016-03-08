@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 20:35:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/08 18:40:41 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ void	print_files(t_flag *flag)
 void	print_files_infos(t_flag *flag, t_file *file)
 {
 	char	link_target[1024];
+	char	*perms;
 
+	perms = ft_strdup("---------");
 	ft_bzero(link_target, 1024);
 	print_file_type(&file->stat);
-	print_owner_perms(&file->stat);
-	print_group_perms(&file->stat);
-	print_other_perms(&file->stat);
-	ft_printf("%*d %-*s%-*s", (flag->max_char_link + 2), file->stat.st_nlink,
-	(flag->max_char_owner + 2), file->owner,
+	set_owner_and_group_perms(&file->stat, perms);
+	set_other_perms(&file->stat, perms);
+	ft_putstr(perms);
+	free(perms);
+	ft_printf("%*d %-*s%-*s", (flag->max_char_link + (print_file_attr(file))),
+	file->stat.st_nlink, (flag->max_char_owner + 2), file->owner,
 	(flag->max_char_group + 2), file->group);
 	flag->max_char_dev > 0 ? print_file_size(flag, &file->stat) :
 	ft_printf("%*d ", flag->max_char_size, file->stat.st_size);

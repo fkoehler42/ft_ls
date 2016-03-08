@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 15:24:48 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 16:26:48 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/08 21:11:29 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		add_file(t_flag *flag, char *file, char *path_name)
 		return (0);
 	if (!(new = (t_file *)malloc(sizeof(*new))))
 	{
-		perror("ft_ls: malloc: ");
+		perror("ft_ls: malloc");
 		return (-1);
 	}
 	new->f_name = ft_strdup(file);
