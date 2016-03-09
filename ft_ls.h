@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/08 20:44:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 11:55:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 typedef struct			s_flag
 {
 	int					a;
+	int					f;
+	int					g;
 	int					l;
 	int					r;
 	int					rec;
@@ -76,6 +78,8 @@ void			sort_file1(t_flag *flag, t_file *new);
 void			sort_file2(t_flag *flag, t_file *new);
 void			sort_path1(t_flag *flag, t_path *new);
 void			sort_path2(t_flag *flag, t_path *new);
+void			no_sorting_file(t_flag *flag, t_file *new);
+void			no_sorting_path(t_flag *flag, t_path *new);
 int				lexico_order(char *s1, char *s2);
 int				rev_lexico_order(char *s1, char *s2);
 int				time_order(char *s1, char *s2,

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 11:37:20 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/08 21:13:31 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/08 21:17:28 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	set_other_perms(struct stat *file, char *perms)
 	if ((*file).st_mode & S_IWOTH)
 		perms[7] = 'w';
 	if (((*file).st_mode & S_IXOTH) && ((*file).st_mode & S_ISVTX))
-		perms[8] = 's';
-	if ((*file).st_mode & S_ISVTX)
+		perms[8] = 't';
+	else if ((*file).st_mode & S_ISVTX)
 		perms[8] = 'T';
 	else if ((*file).st_mode & S_IXOTH)
 		perms[8] = 'x';

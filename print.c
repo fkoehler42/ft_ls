@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/08 18:40:41 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 11:53:44 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_files(t_flag *flag)
 
 	if (!(tmp = flag->file))
 		return ;
-	if (flag->l && (ft_strcmp(tmp->f_name, tmp->f_path) != 0))
+	if ((flag->l || flag->g) && (ft_strcmp(tmp->f_name, tmp->f_path) != 0))
 		ft_printf("total %d\n", count_blocks(flag));
 	while (tmp)
 	{
-		if (flag->l)
+		if (flag->l || flag->g)
 			print_files_infos(flag, tmp);
 		else
 			ft_putendl(tmp->f_name);
@@ -42,9 +42,14 @@ void	print_files_infos(t_flag *flag, t_file *file)
 	set_other_perms(&file->stat, perms);
 	ft_putstr(perms);
 	free(perms);
-	ft_printf("%*d %-*s%-*s", (flag->max_char_link + (print_file_attr(file))),
-	file->stat.st_nlink, (flag->max_char_owner + 2), file->owner,
-	(flag->max_char_group + 2), file->group);
+	if (flag->l)
+		ft_printf("%*d %-*s%-*s", (flag->max_char_link +
+		(print_file_attr(file))), file->stat.st_nlink,
+		(flag->max_char_owner + 2), file->owner, (flag->max_char_group + 2),
+		file->group);
+	else if (flag->g)
+		ft_printf("%*d %-*s", (flag->max_char_link + (print_file_attr(file))),
+		file->stat.st_nlink, (flag->max_char_group + 2), file->group);
 	flag->max_char_dev > 0 ? print_file_size(flag, &file->stat) :
 	ft_printf("%*d ", flag->max_char_size, file->stat.st_size);
 	print_file_time(&file->stat);

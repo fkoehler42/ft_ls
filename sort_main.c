@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 16:30:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 15:55:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 11:41:44 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	sort_path1(t_flag *flag, t_path *new)
 {
 	t_path *tmp;
 
-	if (!(flag->fptr1))
+	if (!(flag->fptr1) && !(flag->fptr2))
+		no_sorting_path(flag, new);
+	else if (!(flag->fptr1))
 		sort_path2(flag, new);
 	else
 	{
@@ -61,7 +63,9 @@ void	sort_file1(t_flag *flag, t_file *new)
 {
 	t_file *tmp;
 
-	if (!(flag->fptr1))
+	if (!(flag->fptr1) && !(flag->fptr2))
+		no_sorting_file(flag, new);
+	else if (!(flag->fptr1))
 		sort_file2(flag, new);
 	else
 	{
