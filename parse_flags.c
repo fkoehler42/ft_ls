@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 12:08:21 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 14:17:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	set_sorting_funct(t_flag *flag)
 	flag->fptr2 = NULL;
 	if (flag->f)
 		return ;
-	if (flag->r && flag->t)
+	if (flag->r && flag->s)
+		flag->fptr2 = &rev_size_order;
+	else if (flag->s)
+		flag->fptr2 = &size_order;
+	else if (flag->r && flag->t)
 		flag->fptr2 = &rev_time_order;
 	else if (flag->t)
 		flag->fptr2 = &time_order;
@@ -40,22 +44,30 @@ int		set_flags(char *arg, t_flag *flag)
 			flag->r = 1;
 		else if (*arg == 'R')
 			flag->rec = 1;
-		else if (*arg == 't' && (flag->f == 0))
+		else if (*arg == 't' && (flag->f == 0) && (flag->s == 0))
 			flag->t = 1;
 		else if (*arg == '1')
+		{
 			flag->l = 0;
+			flag->g = 0;
+		}
 		else if (*arg == 'f')
+		{
 			flag->f = 1;
+			flag->s = 0;
+		}
 		else if (*arg == 'g')
 		{
 			flag->g = 1;
 			flag->l = 0;
 		}
+		else if (*arg == 'S' && (flag->f == 0))
+			flag->s = 1;
 		else if ((*arg != 'r') && (*arg != 't') && (*arg != 'l'))
 			flag_error(*arg);
 		arg++;
 	}
-	if (flag->r || flag->t || flag->f)
+	if (flag->r || flag->t || flag->f || flag->s)
 		set_sorting_funct(flag);
 	return (0);
 }
@@ -64,6 +76,6 @@ void	flag_error(int c)
 {
 	ft_putstr_fd("ft_ls: illegal option -- ", 2);
 	ft_putchar_fd(c, 2);
-	ft_putstr_fd("\nusage: ft_ls [-afglrRt1] [file ...]\n", 2);
+	ft_putstr_fd("\nusage: ft_ls [-afglrRSt1] [file ...]\n", 2);
 	exit(EXIT_SUCCESS);
 }

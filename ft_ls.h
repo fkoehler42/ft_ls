@@ -6,12 +6,20 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 11:55:26 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 15:48:31 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
+
+# define BLUE "\033[0;34m"
+# define GREEN "\033[0;32m"
+# define RED "\033[0;31m"
+# define PURPLE	"\033[0;35m"
+# define YELLOW "\033[1;33m"
+# define CYAN "\033[1;36m"
+# define OFF "\033[01;0m"
 
 # include "libft/includes/libft.h"
 # include "libft/includes/ft_printf.h"
@@ -25,8 +33,6 @@
 # include <grp.h>
 # include <time.h>
 
-# define DEBUG ft_printf("%s, %d\n", __FILE__, __LINE__)
-
 typedef struct			s_flag
 {
 	int					a;
@@ -35,6 +41,7 @@ typedef struct			s_flag
 	int					l;
 	int					r;
 	int					rec;
+	int					s;
 	int					t;
 	int					max_char_link;
 	int					max_char_owner;
@@ -42,7 +49,7 @@ typedef struct			s_flag
 	int					max_char_size;
 	int					max_char_dev;
 	int					(*fptr1)(char *, char *);
-	int					(*fptr2)(char *, char *, struct stat *, struct stat *);
+	long				(*fptr2)(char *, char *, struct stat *, struct stat *);
 	struct s_path		*path;
 	struct s_file		*file;
 }						t_flag;
@@ -82,9 +89,13 @@ void			no_sorting_file(t_flag *flag, t_file *new);
 void			no_sorting_path(t_flag *flag, t_path *new);
 int				lexico_order(char *s1, char *s2);
 int				rev_lexico_order(char *s1, char *s2);
-int				time_order(char *s1, char *s2,
+long			size_order(char *s1, char *s2,
 				struct stat *f1, struct stat *f2);
-int				rev_time_order(char *s1, char *s2,
+long			rev_size_order(char *s1, char *s2,
+				struct stat *f1, struct stat *f2);
+long			time_order(char *s1, char *s2,
+				struct stat *f1, struct stat *f2);
+long			rev_time_order(char *s1, char *s2,
 				struct stat *f1, struct stat *f2);
 void			recursive_path(t_flag *flag);
 
@@ -94,6 +105,7 @@ void			reset_field_widths(t_flag *flag);
 
 int				count_blocks(t_flag *flag);
 void			print_files(t_flag *flag);
+void			print_files_colorized(struct stat *file, char *f_name);
 void			print_files_infos(t_flag *flag, t_file *file);
 void			print_file_type(struct stat *file);
 int				print_file_attr(t_file *file);

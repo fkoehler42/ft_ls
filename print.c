@@ -6,11 +6,29 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 11:53:44 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 15:47:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	print_files_colorized(struct stat *file, char *f_name)
+{
+	if (S_ISBLK((*file).st_mode))
+		ft_printf(BLUE"%s"OFF, f_name);
+	else if (S_ISCHR((*file).st_mode))
+		ft_printf(GREEN"%s"OFF, f_name);
+	else if (S_ISDIR((*file).st_mode))
+		ft_printf(CYAN"%s"OFF, f_name);
+	else if (S_ISLNK((*file).st_mode))
+		ft_printf(PURPLE"%s"OFF, f_name);
+	else if (S_ISSOCK((*file).st_mode))
+		ft_printf(YELLOW"%s"OFF, f_name);
+	else if (S_ISFIFO((*file).st_mode))
+		ft_printf(RED"%s"OFF, f_name);
+	else
+		ft_putstr(f_name);
+}
 
 void	print_files(t_flag *flag)
 {
@@ -25,7 +43,10 @@ void	print_files(t_flag *flag)
 		if (flag->l || flag->g)
 			print_files_infos(flag, tmp);
 		else
-			ft_putendl(tmp->f_name);
+		{
+			print_files_colorized(&tmp->stat, tmp->f_name);
+			ft_putchar('\n');
+		}
 		tmp = tmp->next;
 	}
 }
@@ -61,8 +82,14 @@ void	print_files_infos(t_flag *flag, t_file *file)
 			perror(file->f_name);
 		}
 		else
-			ft_printf("%s -> %s\n", file->f_name, link_target);
+		{
+			print_files_colorized(&file->stat, file->f_name);
+			ft_printf(" -> %s\n", link_target);
+		}
 	}
 	else
-		ft_putendl(file->f_name);
+	{
+		print_files_colorized(&file->stat, file->f_name);
+		ft_putchar('\n');
+	}
 }

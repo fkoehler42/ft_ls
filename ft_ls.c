@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 11:55:13 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 13:38:30 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->l = 0;
 	flag->r = 0;
 	flag->rec = 0;
+	flag->s = 0;
 	flag->t = 0;
 	flag->max_char_link = 0;
 	flag->max_char_owner = 0;

@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 12:28:20 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 22:34:13 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/09 14:26:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		time_order(char *s1, char *s2, struct stat *f1, struct stat *f2)
+long	time_order(char *s1, char *s2, struct stat *f1, struct stat *f2)
 {
 	long	diff;
 
@@ -23,7 +23,7 @@ int		time_order(char *s1, char *s2, struct stat *f1, struct stat *f2)
 	return (ft_strcmp(s1, s2));
 }
 
-int		rev_time_order(char *s1, char *s2, struct stat *f1, struct stat *f2)
+long	rev_time_order(char *s1, char *s2, struct stat *f1, struct stat *f2)
 {
 	long	diff;
 
