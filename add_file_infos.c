@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 16:21:03 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 13:35:43 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 12:50:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int		add_file_infos(t_flag *flag, t_file *file)
 		ft_putstr_fd("ft_ls: ", 2);
 		perror(file->f_name);
 	}
+	if ((nb_char = (ft_strlen(file->f_name))) > flag->max_char_name)
+		flag->max_char_name = nb_char;
 	if ((nb_char = (count_char(file->stat.st_nlink))) > flag->max_char_link)
 		flag->max_char_link = nb_char;
 	set_user_and_group(file);

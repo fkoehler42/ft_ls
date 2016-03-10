@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 13:38:30 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 13:03:47 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	reset_field_widths(t_flag *flag)
 {
+	flag->nb_files = 0;
+	flag->max_char_name = 0;
 	flag->max_char_link = 0;
 	flag->max_char_owner = 0;
 	flag->max_char_group = 0;
@@ -31,6 +33,8 @@ void	init_flag_struct(t_flag *flag)
 	flag->rec = 0;
 	flag->s = 0;
 	flag->t = 0;
+	flag->nb_files = 0;
+	flag->max_char_name = 0;
 	flag->max_char_link = 0;
 	flag->max_char_owner = 0;
 	flag->max_char_group = 0;

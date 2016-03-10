@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 15:48:31 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 13:03:03 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 # include <sys/acl.h>
+# include <sys/ioctl.h>
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
+//# include <termios.h>
 
 typedef struct			s_flag
 {
@@ -43,6 +45,8 @@ typedef struct			s_flag
 	int					rec;
 	int					s;
 	int					t;
+	int					nb_files;
+	int					max_char_name;
 	int					max_char_link;
 	int					max_char_owner;
 	int					max_char_group;
@@ -106,6 +110,7 @@ void			reset_field_widths(t_flag *flag);
 int				count_blocks(t_flag *flag);
 void			print_files(t_flag *flag);
 void			print_files_colorized(struct stat *file, char *f_name);
+int				print_files_in_raw(t_flag *flag);
 void			print_files_infos(t_flag *flag, t_file *file);
 void			print_file_type(struct stat *file);
 int				print_file_attr(t_file *file);
@@ -113,5 +118,6 @@ void			print_file_size(t_flag *flag, struct stat *file);
 void			print_file_time(struct stat *file);
 void			set_owner_and_group_perms(struct stat *file, char *perms);
 void			set_other_perms(struct stat *file, char *perms);
+
 
 #endif

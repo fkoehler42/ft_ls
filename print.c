@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 15:47:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 13:09:36 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ void	print_files(t_flag *flag)
 		return ;
 	if ((flag->l || flag->g) && (ft_strcmp(tmp->f_name, tmp->f_path) != 0))
 		ft_printf("total %d\n", count_blocks(flag));
-	while (tmp)
+	if (flag->l || flag->g)
 	{
-		if (flag->l || flag->g)
-			print_files_infos(flag, tmp);
-		else
+		while (tmp)
 		{
-			print_files_colorized(&tmp->stat, tmp->f_name);
-			ft_putchar('\n');
+			print_files_infos(flag, tmp);
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
+	else
+		print_files_in_raw(flag);
 }
 
 void	print_files_infos(t_flag *flag, t_file *file)
