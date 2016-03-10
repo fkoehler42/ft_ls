@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 13:03:03 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 17:54:00 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct			s_flag
 	int					rec;
 	int					s;
 	int					t;
+	int					one;
+	int					color;
 	int					nb_files;
 	int					max_char_name;
 	int					max_char_link;
@@ -110,7 +112,8 @@ void			reset_field_widths(t_flag *flag);
 int				count_blocks(t_flag *flag);
 void			print_files(t_flag *flag);
 void			print_files_colorized(struct stat *file, char *f_name);
-int				print_files_in_raw(t_flag *flag);
+int				print_files_in_row(t_flag *flag);
+void			print_files_no_row(t_flag *flag);
 void			print_files_infos(t_flag *flag, t_file *file);
 void			print_file_type(struct stat *file);
 int				print_file_attr(t_file *file);

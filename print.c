@@ -6,11 +6,29 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 13:09:36 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 17:48:32 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	print_files_no_row(t_flag *flag)
+{
+	t_file *tmp;
+
+	tmp = flag->file;
+	while (tmp)
+	{
+		if (flag->color)
+		{
+			print_files_colorized(&tmp->stat, tmp->f_name);
+			ft_putchar('\n');
+		}
+		else
+			ft_putendl(tmp->f_name);
+		tmp = tmp->next;
+	}
+}
 
 void	print_files_colorized(struct stat *file, char *f_name)
 {
@@ -46,8 +64,8 @@ void	print_files(t_flag *flag)
 			tmp = tmp->next;
 		}
 	}
-	else
-		print_files_in_raw(flag);
+	else if (print_files_in_row(flag) < 0)
+		print_files_no_row(flag);
 }
 
 void	print_files_infos(t_flag *flag, t_file *file)
