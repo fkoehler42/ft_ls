@@ -6,11 +6,31 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 17:48:32 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 20:45:22 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	print_symlink(t_flag *flag, t_file *file)
+{
+	char	link_target[1024];
+
+	ft_bzero(link_target, 1024);
+	if (readlink(file->f_path, link_target, 1023) < 0)
+	{
+		ft_putstr_fd("ft_ls: ", 2);
+		perror(file->f_name);
+	}
+	else
+	{
+		if (flag->color)
+			print_files_colorized(&file->stat, file->f_name);
+		else
+			ft_putstr(file->f_name);
+		ft_printf(" -> %s\n", link_target);
+	}
+}
 
 void	print_files_no_row(t_flag *flag)
 {
@@ -54,27 +74,25 @@ void	print_files(t_flag *flag)
 
 	if (!(tmp = flag->file))
 		return ;
-	if ((flag->l || flag->g) && (ft_strcmp(tmp->f_name, tmp->f_path) != 0))
-		ft_printf("total %d\n", count_blocks(flag));
 	if (flag->l || flag->g)
 	{
+		if (ft_strcmp(tmp->f_name, tmp->f_path) != 0)
+			ft_printf("total %d\n", count_blocks(flag));
 		while (tmp)
 		{
 			print_files_infos(flag, tmp);
 			tmp = tmp->next;
 		}
 	}
-	else if (print_files_in_row(flag) < 0)
+	else if (flag->one || print_files_in_row(flag) < 0)
 		print_files_no_row(flag);
 }
 
 void	print_files_infos(t_flag *flag, t_file *file)
 {
-	char	link_target[1024];
 	char	*perms;
 
 	perms = ft_strdup("---------");
-	ft_bzero(link_target, 1024);
 	print_file_type(&file->stat);
 	set_owner_and_group_perms(&file->stat, perms);
 	set_other_perms(&file->stat, perms);
@@ -92,21 +110,13 @@ void	print_files_infos(t_flag *flag, t_file *file)
 	ft_printf("%*d ", flag->max_char_size, file->stat.st_size);
 	print_file_time(&file->stat);
 	if (S_ISLNK(file->stat.st_mode))
-	{
-		if (readlink(file->f_path, link_target, 1023) < 0)
-		{
-			ft_putstr_fd("ft_ls: ", 2);
-			perror(file->f_name);
-		}
-		else
-		{
-			print_files_colorized(&file->stat, file->f_name);
-			ft_printf(" -> %s\n", link_target);
-		}
-	}
+		print_symlink(flag, file);
 	else
 	{
-		print_files_colorized(&file->stat, file->f_name);
+		if (flag->color)
+			print_files_colorized(&file->stat, file->f_name);
+		else
+			ft_putstr(file->f_name);
 		ft_putchar('\n');
 	}
 }

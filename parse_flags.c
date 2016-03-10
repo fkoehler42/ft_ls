@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/09 14:17:34 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 20:24:45 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,36 @@ int		set_flags(char *arg, t_flag *flag)
 	{
 		if (*arg == 'a')
 			flag->a = 1;
-		else if (*arg == 'l' && (flag->g == 0))
-			flag->l = 1;
-		else if (*arg == 'r' && (flag->f == 0))
-			flag->r = 1;
+		else if (*arg == 'G')
+			flag->color = 1;
 		else if (*arg == 'R')
 			flag->rec = 1;
+		else if (*arg == 'l' && (flag->g == 0))
+		{
+			flag->l = 1;
+			flag->one = 0;
+		}
+		else if (*arg == 'r' && (flag->f == 0))
+			flag->r = 1;
 		else if (*arg == 't' && (flag->f == 0) && (flag->s == 0))
 			flag->t = 1;
 		else if (*arg == '1')
 		{
 			flag->l = 0;
 			flag->g = 0;
+			flag->one = 1;
 		}
 		else if (*arg == 'f')
 		{
 			flag->f = 1;
 			flag->s = 0;
+			flag->t = 0;
 		}
 		else if (*arg == 'g')
 		{
 			flag->g = 1;
 			flag->l = 0;
+			flag->one = 0;
 		}
 		else if (*arg == 'S' && (flag->f == 0))
 			flag->s = 1;
@@ -76,6 +84,6 @@ void	flag_error(int c)
 {
 	ft_putstr_fd("ft_ls: illegal option -- ", 2);
 	ft_putchar_fd(c, 2);
-	ft_putstr_fd("\nusage: ft_ls [-afglrRSt1] [file ...]\n", 2);
+	ft_putstr_fd("\nusage: ft_ls [-afgGlrRSt1] [file ...]\n", 2);
 	exit(EXIT_SUCCESS);
 }

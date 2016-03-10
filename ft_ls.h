@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 17:54:00 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/10 20:30:49 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void			print_file_type(struct stat *file);
 int				print_file_attr(t_file *file);
 void			print_file_size(t_flag *flag, struct stat *file);
 void			print_file_time(struct stat *file);
+void			print_symlink(t_flag *flag, t_file *file);
 void			set_owner_and_group_perms(struct stat *file, char *perms);
 void			set_other_perms(struct stat *file, char *perms);
 
