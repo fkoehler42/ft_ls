@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 11:37:20 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/08 21:17:28 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 15:18:54 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int		print_file_attr(t_file *file)
 		acl_free((void *)acl);
 		return (1);
 	}
+	acl_free((void *)acl);
 	return (2);
 }
