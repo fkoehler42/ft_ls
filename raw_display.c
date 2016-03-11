@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:57:25 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 10:07:03 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 13:57:56 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ int			print_files_in_row(t_flag *flag)
 	k = 0;
 	if ((columns = (get_term_width())) < 0)
 		return (-1);
-	files_col = columns / (flag->max_char_name + 1);
+	if (!(files_col = columns / (flag->max_char_name + 1)))
+	{
+		print_files_no_row(flag);
+		return (0);
+	}
 	files_lines = (flag->nb_files % files_col == 0) ? flag->nb_files / files_col
 	: (flag->nb_files / files_col) + 1;
-	//ft_printf("largeur : %d, colonnes : %d, lignes : %d\n", columns, files_col, files_lines);
 	tmp1 = flag->file;
 	k = files_lines;
 	while (k--)

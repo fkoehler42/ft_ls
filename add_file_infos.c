@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 16:21:03 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 12:50:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 14:28:50 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static	int	count_char(long nb)
+static int	count_char(long nb)
 {
 	int	i;
 
@@ -27,10 +27,10 @@ static	int	count_char(long nb)
 	return (i);
 }
 
-static	void set_user_and_group(t_file *file)
+static void	set_user_and_group(t_file *file)
 {
-	struct	passwd	*user;
-	struct	group	*group;
+	t_passwd	*user;
+	t_group		*group;
 
 	user = getpwuid(file->stat.st_uid);
 	group = getgrgid(file->stat.st_gid);
@@ -44,20 +44,18 @@ static	void set_user_and_group(t_file *file)
 		file->group = ft_itoa(file->stat.st_gid);
 }
 
-static	void device_infos(t_flag *flag, t_file *file)
+static void	device_infos(t_flag *flag, t_file *file)
 {
 	int	nb_char;
 
 	nb_char = 0;
-	if ((nb_char = (count_char(major(file->stat.st_rdev)))) >
-		flag->max_char_dev)
-			flag->max_char_dev = nb_char;
-	if ((nb_char = (count_char(minor(file->stat.st_rdev)))) >
-		flag->max_char_size)
-			flag->max_char_size = nb_char;
+	if ((nb_char = count_char(major(file->stat.st_rdev))) > flag->max_char_dev)
+		flag->max_char_dev = nb_char;
+	if ((nb_char = count_char(minor(file->stat.st_rdev))) > flag->max_char_size)
+		flag->max_char_size = nb_char;
 }
 
-int		add_file_infos(t_flag *flag, t_file *file)
+int			add_file_infos(t_flag *flag, t_file *file)
 {
 	int	nb_char;
 
@@ -79,6 +77,6 @@ int		add_file_infos(t_flag *flag, t_file *file)
 	if ((S_ISBLK(file->stat.st_mode)) || (S_ISCHR(file->stat.st_mode)))
 		device_infos(flag, file);
 	else if ((nb_char = (count_char(file->stat.st_size))) > flag->max_char_size)
-			flag->max_char_size = nb_char;
+		flag->max_char_size = nb_char;
 	return (0);
 }

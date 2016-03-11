@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 12:14:10 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 13:31:21 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
-//# include <termios.h>
 
 typedef struct group	t_group;
 typedef struct passwd	t_passwd;

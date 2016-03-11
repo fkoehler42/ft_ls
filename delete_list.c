@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 10:40:57 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 20:26:19 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 14:17:18 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	delete_files_list(t_flag *flag)
 		tmp1 = tmp2;
 	}
 	flag->file = NULL;
+	flag->max_char_name = 0;
 	flag->max_char_link = 0;
 	flag->max_char_owner = 0;
 	flag->max_char_group = 0;
