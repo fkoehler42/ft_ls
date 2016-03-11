@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 12:04:05 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 18:02:33 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			set_sorting_funct(t_flag *flag)
+static void	set_sorting_funct(t_flag *flag)
 {
 	flag->fptr1 = NULL;
 	flag->fptr2 = NULL;
@@ -32,7 +32,15 @@ void			set_sorting_funct(t_flag *flag)
 		flag->fptr1 = &lexico_order;
 }
 
-static	void	set_flags1(char *arg, t_flag *flag)
+static void	flag_error(int c)
+{
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("\nusage: ft_ls [-afgGlrRSt1] [file ...]\n", 2);
+	exit(EXIT_SUCCESS);
+}
+
+static void	set_flags1(char *arg, t_flag *flag)
 {
 	if (*arg == 't' && (flag->f == 0) && (flag->s == 0))
 		flag->t = 1;
@@ -60,7 +68,7 @@ static	void	set_flags1(char *arg, t_flag *flag)
 		flag_error(*arg);
 }
 
-int				set_flags(char *arg, t_flag *flag)
+int			set_flags(char *arg, t_flag *flag)
 {
 	while (*arg)
 	{
@@ -84,12 +92,4 @@ int				set_flags(char *arg, t_flag *flag)
 	if (flag->r || flag->t || flag->f || flag->s)
 		set_sorting_funct(flag);
 	return (0);
-}
-
-void			flag_error(int c)
-{
-	ft_putstr_fd("ft_ls: illegal option -- ", 2);
-	ft_putchar_fd(c, 2);
-	ft_putstr_fd("\nusage: ft_ls [-afgGlrRSt1] [file ...]\n", 2);
-	exit(EXIT_SUCCESS);
 }

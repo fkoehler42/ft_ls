@@ -6,20 +6,12 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 14:30:28 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 18:22:31 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-
-# define BLUE "\033[0;34m"
-# define GREEN "\033[0;32m"
-# define RED "\033[0;31m"
-# define PURPLE	"\033[0;35m"
-# define YELLOW "\033[1;33m"
-# define CYAN "\033[1;36m"
-# define OFF "\033[01;0m"
 
 # include "libft/includes/libft.h"
 # include "libft/includes/ft_printf.h"
@@ -34,8 +26,17 @@
 # include <grp.h>
 # include <time.h>
 
+# define BLUE "\033[0;34m"
+# define GREEN "\033[0;32m"
+# define RED "\033[0;31m"
+# define PURPLE	"\033[0;35m"
+# define YELLOW "\033[1;33m"
+# define CYAN "\033[1;36m"
+# define OFF "\033[01;0m"
+
 typedef struct group	t_group;
 typedef struct passwd	t_passwd;
+
 typedef struct			s_flag
 {
 	int					a;
@@ -49,6 +50,7 @@ typedef struct			s_flag
 	int					one;
 	int					color;
 	int					nb_files;
+	int					term_width;
 	int					max_char_name;
 	int					max_char_link;
 	int					max_char_owner;
@@ -81,13 +83,11 @@ typedef struct			s_file
 int				read_args(int ac, char **av, t_flag *flag);
 void			parse_arg(t_flag *flag, char *arg);
 int				set_flags(char *arg, t_flag *flag);
-void			flag_error(int c);
 int				add_path(t_flag *flag, char *arg);
 int				add_file(t_flag *flag, char *file, char *path_name);
 int				add_file_infos(t_flag *flag, t_file *file);
 int				read_path(t_flag *flag, char *path_name);
 
-void			set_sorting_funct(t_flag *flag);
 void			sort_file1(t_flag *flag, t_file *new);
 void			sort_file2(t_flag *flag, t_file *new);
 void			sort_path1(t_flag *flag, t_path *new);
@@ -123,8 +123,6 @@ int				print_file_attr(t_file *file);
 void			print_file_size(t_flag *flag, struct stat *file);
 void			print_file_time(struct stat *file);
 void			print_symlink(t_flag *flag, t_file *file);
-void			set_owner_and_group_perms(struct stat *file, char *perms);
-void			set_other_perms(struct stat *file, char *perms);
-
+void			set_perms(struct stat *file, char *perms);
 
 #endif

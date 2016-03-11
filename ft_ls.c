@@ -6,13 +6,13 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 15:13:34 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 17:55:45 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 17:06:19 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	reset_field_widths(t_flag *flag)
+void		reset_field_widths(t_flag *flag)
 {
 	flag->nb_files = 0;
 	flag->max_char_name = 0;
@@ -23,7 +23,16 @@ void	reset_field_widths(t_flag *flag)
 	flag->max_char_dev = 0;
 }
 
-void	init_flag_struct(t_flag *flag)
+static int	get_term_width(void)
+{
+	struct winsize	w;
+
+	if ((ioctl(STDOUT_FILENO, TIOCGWINSZ, &w)) < 0)
+		return (-1);
+	return (w.ws_col);
+}
+
+void		init_flag_struct(t_flag *flag)
 {
 	flag->a = 0;
 	flag->f = 0;
@@ -36,6 +45,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->one = 0;
 	flag->color = 0;
 	flag->nb_files = 0;
+	flag->term_width = get_term_width();
 	flag->max_char_name = 0;
 	flag->max_char_link = 0;
 	flag->max_char_owner = 0;
@@ -48,7 +58,7 @@ void	init_flag_struct(t_flag *flag)
 	flag->file = NULL;
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		nb_path;
 	t_flag	flag;

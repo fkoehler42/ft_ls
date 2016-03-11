@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 10:03:01 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 18:15:42 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void	print_files_infos(t_flag *flag, t_file *file)
 
 	perms = ft_strdup("---------");
 	print_file_type(&file->stat);
-	set_owner_and_group_perms(&file->stat, perms);
-	set_other_perms(&file->stat, perms);
+	set_perms(&file->stat, perms);
 	ft_putstr(perms);
 	free(perms);
 	if (flag->l)
@@ -93,12 +92,9 @@ void	print_files_infos(t_flag *flag, t_file *file)
 	print_file_time(&file->stat);
 	if (S_ISLNK(file->stat.st_mode))
 		print_symlink(flag, file);
+	else if (flag->color)
+		print_files_colorized(&file->stat, file->f_name);
 	else
-	{
-		if (flag->color)
-			print_files_colorized(&file->stat, file->f_name);
-		else
-			ft_putstr(file->f_name);
-		ft_putchar('\n');
-	}
+		ft_putstr(file->f_name);
+	ft_putchar('\n');
 }
