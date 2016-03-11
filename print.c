@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 18:15:42 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 19:13:33 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_symlink(t_flag *flag, t_file *file)
 			print_files_colorized(&file->stat, file->f_name);
 		else
 			ft_putstr(file->f_name);
-		ft_printf(" -> %s\n", link_target);
+		ft_printf(" -> %s", link_target);
 	}
 }
 

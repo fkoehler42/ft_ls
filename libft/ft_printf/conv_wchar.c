@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 13:07:51 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:06:16 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 18:29:10 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	display_wchar1(char *bits, int i)
 	{
 		int_byte = binary_to_int(bytes[i], 7);
 		write(1, &int_byte, 1);
+		free(bytes[i]);
 		i++;
 	}
 	free(bytes);
