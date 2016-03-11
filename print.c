@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 20:45:22 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 10:03:01 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,6 @@ void	print_files_no_row(t_flag *flag)
 			ft_putendl(tmp->f_name);
 		tmp = tmp->next;
 	}
-}
-
-void	print_files_colorized(struct stat *file, char *f_name)
-{
-	if (S_ISBLK((*file).st_mode))
-		ft_printf(BLUE"%s"OFF, f_name);
-	else if (S_ISCHR((*file).st_mode))
-		ft_printf(GREEN"%s"OFF, f_name);
-	else if (S_ISDIR((*file).st_mode))
-		ft_printf(CYAN"%s"OFF, f_name);
-	else if (S_ISLNK((*file).st_mode))
-		ft_printf(PURPLE"%s"OFF, f_name);
-	else if (S_ISSOCK((*file).st_mode))
-		ft_printf(YELLOW"%s"OFF, f_name);
-	else if (S_ISFIFO((*file).st_mode))
-		ft_printf(RED"%s"OFF, f_name);
-	else
-		ft_putstr(f_name);
 }
 
 void	print_files(t_flag *flag)

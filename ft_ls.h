@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 20:30:49 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 12:14:10 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <time.h>
 //# include <termios.h>
 
+typedef struct group	t_group;
+typedef struct passwd	t_passwd;
 typedef struct			s_flag
 {
 	int					a;
@@ -112,6 +114,8 @@ void			reset_field_widths(t_flag *flag);
 int				count_blocks(t_flag *flag);
 void			print_files(t_flag *flag);
 void			print_files_colorized(struct stat *file, char *f_name);
+void			print_files_colorized_raw(struct stat *file, char *f_name,
+				int width);
 int				print_files_in_row(t_flag *flag);
 void			print_files_no_row(t_flag *flag);
 void			print_files_infos(t_flag *flag, t_file *file);

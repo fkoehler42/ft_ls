@@ -6,11 +6,12 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/09 09:46:03 by fkoehler          #+#    #+#              #
-#    Updated: 2016/03/10 12:40:13 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/11 10:05:10 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = add_file_infos.c \
+colorized_display.c \
 delete_list.c \
 directory_size.c \
 file_owner.c \

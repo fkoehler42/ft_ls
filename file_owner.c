@@ -6,16 +6,16 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/03 16:06:43 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/05 21:35:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 12:13:26 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_user_and_group(struct stat *file)
+void	print_user_and_group(struct	stat *file)
 {
-	struct	passwd *user;
-	struct	group *group;
+	t_group		*group;
+	t_passwd	*passwd;
 
 	user = getpwuid((*file).st_uid);
 	group = getgrgid((*file).st_gid);

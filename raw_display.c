@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:57:25 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/10 20:39:50 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 10:07:03 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int			print_files_in_row(t_flag *flag)
 	while (k--)
 	{
 		tmp2 = tmp1;
+		flag->color ? print_files_colorized_raw(&tmp1->stat, tmp1->f_name,
+		(flag->max_char_name + 1)) :
 		ft_printf("%-*s", (flag->max_char_name + 1), tmp1->f_name);
 		i = files_col;
 		while (--i && tmp2)
@@ -54,6 +56,8 @@ int			print_files_in_row(t_flag *flag)
 			while (j-- && tmp2)
 				tmp2 = tmp2->next;
 			if (tmp2)
+				flag->color ? print_files_colorized_raw(&tmp2->stat,
+				tmp2->f_name, (flag->max_char_name + 1)) :
 				ft_printf("%-*s", (flag->max_char_name + 1), tmp2->f_name);
 		}
 		ft_putchar('\n');

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/07 15:30:10 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/11 10:58:23 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_arg(t_flag *flag, char *arg)
 		add_path(flag, arg);
 	else if (S_ISLNK(buf.st_mode))
 	{
-		if ((stat(arg, &buf)) < 0 || flag->l)
+		if ((stat(arg, &buf)) < 0 || flag->l || (!(S_ISDIR(buf.st_mode))))
 			add_file(flag, arg, "");
 		else
 			add_path(flag, arg);
