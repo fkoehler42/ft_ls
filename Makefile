@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/09 09:46:03 by fkoehler          #+#    #+#              #
-#    Updated: 2016/03/11 14:57:00 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/12 15:12:18 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ sort_time.c
 
 NAME = ft_ls
 
-FLAGS = -g -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
 LIBDIR = ./libft/
 

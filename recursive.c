@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 19:31:56 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 16:33:18 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 14:45:45 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	free_elem(t_file *file)
 
 void		recursive_path(t_flag *flag)
 {
-	t_file 	*tmp;
+	t_file	*tmp;
 	t_file	*prev;
 
 	tmp = flag->file;

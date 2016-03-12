@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 11:57:25 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 18:17:55 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 14:46:04 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int			print_files_in_row(t_flag *flag)
 	k = files_lines;
 	while (k--)
 	{
-			print_files_in_row1(flag, tmp1, files_lines, files_col);
-			tmp1 = tmp1->next;
+		print_files_in_row1(flag, tmp1, files_lines, files_col);
+		tmp1 = tmp1->next;
 	}
 	return (0);
 }
