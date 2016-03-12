@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 18:54:06 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 19:13:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 19:33:50 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ void	print_files_infos(t_flag *flag, t_file *file)
 	ft_putstr(perms);
 	free(perms);
 	if (flag->l)
-		ft_printf("%*d %-*s%-*s", (flag->max_char_link +
+		ft_printf("%*hu %-*s%-*s", (flag->max_char_link +
 		(print_file_attr(file))), file->stat.st_nlink,
 		(flag->max_char_owner + 2), file->owner, (flag->max_char_group + 2),
 		file->group);
 	else if (flag->g)
-		ft_printf("%*d %-*s", (flag->max_char_link + (print_file_attr(file))),
+		ft_printf("%*hu %-*s", (flag->max_char_link + (print_file_attr(file))),
 		file->stat.st_nlink, (flag->max_char_group + 2), file->group);
 	flag->max_char_dev > 0 ? print_file_size(flag, &file->stat) :
-	ft_printf("%*d ", flag->max_char_size, file->stat.st_size);
+	ft_printf("%*lld ", flag->max_char_size, file->stat.st_size);
 	print_file_time(&file->stat);
 	if (S_ISLNK(file->stat.st_mode))
 		print_symlink(flag, file);

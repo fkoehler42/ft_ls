@@ -6,7 +6,7 @@
 #    By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/09 09:46:03 by fkoehler          #+#    #+#              #
-#    Updated: 2016/03/12 15:12:18 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/12 19:14:22 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ FLAGS = -Wall -Werror -Wextra
 
 LIBDIR = ./libft/
 
+INCLUDES = $(LIBDIR)includes/
+
 LIB = $(LIBDIR)libft.a
 
 OBJ = $(SRC:.c=.o)
@@ -44,13 +46,13 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJ)
-		gcc $(FLAGS) $(OBJ) -L$(LIBDIR) -lft -o $(NAME)
+		gcc $(FLAGS) $(OBJ) -L$(LIBDIR) -lft -o $@
 
 $(LIB):
 	make -C $(LIBDIR)
 
 %.o: %.c
-	gcc $(FLAGS) -c $< -I $(LIBDIR)
+	gcc $(FLAGS) -c $< -I $(INCLUDES)
 
 clean:
 	rm -f $(OBJ)

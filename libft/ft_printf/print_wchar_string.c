@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 14:04:13 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:54:27 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:53:02 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	flags_on_wchar_string1(wchar_t *s, int nb_bytes, t_arg *arg)
 		g_bytes += bytes;
 		if ((arg->width - bytes) > 0)
 		{
-			ft_putnspaces((arg->width - bytes));
+			ft_putnchar(' ', (arg->width - bytes));
 			g_bytes += (arg->width - bytes);
 		}
 	}
 	else if (arg->width > nb_bytes)
 	{
 		display_wchar_string(s);
-		ft_putnspaces(arg->width - nb_bytes);
+		ft_putnchar(' ', arg->width - nb_bytes);
 		g_bytes += arg->width;
 	}
 }
@@ -88,8 +88,8 @@ void	flags_on_wchar_string2(wchar_t *s, int nb_bytes, t_arg *arg)
 		bytes -= count_wchar_bytes(s[i]);
 		if ((arg->width - bytes) > 0)
 		{
-			arg->zero ? ft_putnzeros((arg->width - bytes)) :
-				ft_putnspaces((arg->width - bytes));
+			arg->zero ? ft_putnchar('0', (arg->width - bytes)) :
+				ft_putnchar(' ', (arg->width - bytes));
 			g_bytes += (arg->width - bytes);
 		}
 		while (j < i && j++)
@@ -102,8 +102,8 @@ void	flags_on_wchar_string2(wchar_t *s, int nb_bytes, t_arg *arg)
 
 void	flags_on_wchar_string3(wchar_t *s, int nb_bytes, t_arg *arg)
 {
-	arg->zero ? ft_putnzeros(arg->width - nb_bytes) :
-	ft_putnspaces(arg->width - nb_bytes);
+	arg->zero ? ft_putnchar('0', arg->width - nb_bytes) :
+	ft_putnchar(' ', arg->width - nb_bytes);
 	display_wchar_string(s);
 	g_bytes += arg->width;
 }

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 10:28:40 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/10 16:07:59 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:49:20 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	flags_on_char(int c, t_arg *arg)
 	if (arg->minus)
 	{
 		ft_putchar(c);
-		ft_putnspaces(arg->width - 1);
+		ft_putnchar(' ', arg->width - 1);
 	}
 	else
 	{
-		arg->zero ? ft_putnzeros(arg->width - 1) :
-		ft_putnspaces(arg->width - 1);
+		arg->zero ? ft_putnchar('0', arg->width - 1) :
+		ft_putnchar(' ', arg->width - 1);
 		ft_putchar(c);
 	}
 	g_bytes += arg->width;
@@ -68,11 +68,11 @@ void	flags_on_wchar(wchar_t c, int nb_bytes, t_arg *arg)
 	{
 		if (c != 0)
 			display_wchar(c);
-		ft_putnspaces(n);
+		ft_putnchar(' ', n);
 	}
 	else
 	{
-		ft_putnspaces(n);
+		ft_putnchar(' ', n);
 		if (c != 0)
 			display_wchar(c);
 	}

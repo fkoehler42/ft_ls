@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/01 12:40:46 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:21:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:49:45 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	minus_plus_decimal(long long nb, int nb_char, t_arg *arg)
 	arg->width--;
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	ft_put_llong_base(nb, 10);
@@ -54,12 +54,12 @@ void	minus_plus_decimal(long long nb, int nb_char, t_arg *arg)
 	{
 		if (arg->precision > nb_char)
 		{
-			ft_putnspaces(arg->width - arg->precision);
+			ft_putnchar(' ', arg->width - arg->precision);
 			g_bytes += arg->width - arg->precision;
 		}
 		else if (nb_char >= arg->precision)
 		{
-			ft_putnspaces(arg->width - nb_char);
+			ft_putnchar(' ', arg->width - nb_char);
 			g_bytes += arg->width - nb_char;
 		}
 	}
@@ -73,7 +73,7 @@ void	minus_space_decimal(long long nb, int nb_char, t_arg *arg)
 	arg->width--;
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	ft_put_llong_base(nb, 10);
@@ -82,12 +82,12 @@ void	minus_space_decimal(long long nb, int nb_char, t_arg *arg)
 	{
 		if (arg->precision > nb_char)
 		{
-			ft_putnspaces(arg->width - arg->precision);
+			ft_putnchar(' ', arg->width - arg->precision);
 			g_bytes += arg->width - arg->precision;
 		}
 		else if (nb_char >= arg->precision)
 		{
-			ft_putnspaces(arg->width - nb_char);
+			ft_putnchar(' ', arg->width - nb_char);
 			g_bytes += arg->width - nb_char;
 		}
 	}
@@ -102,7 +102,7 @@ void	minus_decimal(long long nb, int nb_char, t_arg *arg)
 	}
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	ft_put_llong_base(nb, 10);
@@ -111,12 +111,12 @@ void	minus_decimal(long long nb, int nb_char, t_arg *arg)
 	{
 		if (arg->precision > nb_char)
 		{
-			ft_putnspaces(arg->width - arg->precision);
+			ft_putnchar(' ', arg->width - arg->precision);
 			g_bytes += arg->width - arg->precision;
 		}
 		else if (nb_char >= arg->precision)
 		{
-			ft_putnspaces(arg->width - nb_char);
+			ft_putnchar(' ', arg->width - nb_char);
 			g_bytes += arg->width - nb_char;
 		}
 	}
@@ -130,7 +130,7 @@ void	zero_plus_decimal(long long nb, int nb_char, t_arg *arg)
 	arg->width--;
 	if (arg->width > nb_char)
 	{
-		ft_putnzeros(arg->width - nb_char);
+		ft_putnchar('0', arg->width - nb_char);
 		g_bytes += arg->width - nb_char;
 	}
 	ft_put_llong_base(nb, 10);

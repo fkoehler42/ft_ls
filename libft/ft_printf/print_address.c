@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 22:34:58 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 16:37:56 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:46:25 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	minus_address(unsigned long addr, int nb_char, t_arg *arg)
 	ft_putstr("0x");
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	if (!(addr == 0 && arg->precision == 0))
@@ -48,12 +48,12 @@ void	minus_address(unsigned long addr, int nb_char, t_arg *arg)
 	{
 		if (arg->precision > nb_char)
 		{
-			ft_putnspaces(arg->width - arg->precision - 2);
+			ft_putnchar(' ', arg->width - arg->precision - 2);
 			g_bytes += arg->width - arg->precision - 2;
 		}
 		else if (nb_char >= arg->precision)
 		{
-			ft_putnspaces(arg->width - nb_char - 2);
+			ft_putnchar(' ', arg->width - nb_char - 2);
 			g_bytes += arg->width - nb_char - 2;
 		}
 	}
@@ -68,19 +68,19 @@ void	zero_address(unsigned long addr, int nb_char, t_arg *arg)
 	if (arg->width > (arg->precision + 2) && arg->width > (nb_char + 2)
 		&& arg->precision > -1)
 	{
-		ft_putnspaces(n - 2);
+		ft_putnchar(' ', n - 2);
 		g_bytes += n - 2;
 	}
 	ft_putstr("0x");
 	if (arg->width > (arg->precision + 2) && arg->width > (nb_char + 2)
 	&& arg->precision == -1)
 	{
-		ft_putnzeros(arg->width - nb_char - 2);
+		ft_putnchar('0', arg->width - nb_char - 2);
 		g_bytes += arg->width - nb_char - 2;
 	}
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	if (!(addr == 0 && arg->precision == 0))
@@ -92,18 +92,18 @@ void	no_minus_address(unsigned long addr, int nb_char, t_arg *arg)
 {
 	if (arg->width > (arg->precision + 2) && arg->precision > nb_char)
 	{
-		ft_putnspaces(arg->width - arg->precision - 2);
+		ft_putnchar(' ', arg->width - arg->precision - 2);
 		g_bytes += arg->width - arg->precision - 2;
 	}
 	else if (arg->width > (nb_char + 2) && nb_char >= arg->precision)
 	{
-		ft_putnspaces(arg->width - nb_char - 2);
+		ft_putnchar(' ', arg->width - nb_char - 2);
 		g_bytes += arg->width - nb_char - 2;
 	}
 	ft_putstr("0x");
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	if (!(addr == 0 && arg->precision == 0))

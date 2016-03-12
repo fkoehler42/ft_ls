@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 12:05:47 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:51:27 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:52:30 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	print_string(va_list ap, t_arg *arg)
 	else if (arg->width > nb_char && arg->minus)
 	{
 		ft_putstr(s);
-		ft_putnspaces(arg->width - nb_char);
+		ft_putnchar(' ', arg->width - nb_char);
 		g_bytes += arg->width;
 	}
 	else if (arg->width > nb_char)
 	{
-		arg->zero ? ft_putnzeros(arg->width - nb_char) :
-		ft_putnspaces(arg->width - nb_char);
+		arg->zero ? ft_putnchar('0', arg->width - nb_char) :
+		ft_putnchar(' ', arg->width - nb_char);
 		ft_putstr(s);
 		g_bytes += arg->width;
 	}
@@ -48,12 +48,12 @@ void	flags_on_string(char *s, t_arg *arg)
 	{
 		n = arg->width - arg->precision;
 		ft_putnstr(s, arg->precision);
-		ft_putnspaces(n);
+		ft_putnchar(' ', n);
 	}
 	else if (arg->width > arg->precision)
 	{
 		n = arg->width - arg->precision;
-		arg->zero ? ft_putnzeros(n) : ft_putnspaces(n);
+		arg->zero ? ft_putnchar('0', n) : ft_putnchar(' ', n);
 		ft_putnstr(s, arg->precision);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 12:03:36 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/02/12 14:29:11 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:51:40 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	minus_octal(unsigned long long nb, int nb_char, t_arg *arg)
 {
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	else if (arg->sharp && ++g_bytes && --arg->width)
@@ -48,12 +48,12 @@ void	minus_octal(unsigned long long nb, int nb_char, t_arg *arg)
 	{
 		if (arg->precision > nb_char)
 		{
-			ft_putnspaces(arg->width - arg->precision);
+			ft_putnchar(' ', arg->width - arg->precision);
 			g_bytes += arg->width - arg->precision;
 		}
 		else if (nb_char >= arg->precision)
 		{
-			ft_putnspaces(arg->width - nb_char);
+			ft_putnchar(' ', arg->width - nb_char);
 			g_bytes += arg->width - nb_char;
 		}
 	}
@@ -63,7 +63,7 @@ void	zero_octal(unsigned long long nb, int nb_char, t_arg *arg)
 {
 	if (arg->width > nb_char && arg->precision == -1)
 	{
-		ft_putnzeros(arg->width - nb_char);
+		ft_putnchar('0', arg->width - nb_char);
 		ft_put_ullong_base(nb, 8);
 		g_bytes += arg->width;
 	}
@@ -79,17 +79,17 @@ void	no_flag_octal(unsigned long long nb, int nb_char, t_arg *arg)
 {
 	if (arg->width > arg->precision && arg->precision > nb_char)
 	{
-		ft_putnspaces(arg->width - arg->precision);
+		ft_putnchar(' ', arg->width - arg->precision);
 		g_bytes += arg->width - arg->precision;
 	}
 	else if (arg->width > nb_char && nb_char >= arg->precision)
 	{
-		ft_putnspaces(arg->width - nb_char);
+		ft_putnchar(' ', arg->width - nb_char);
 		g_bytes += arg->width - nb_char;
 	}
 	if (arg->precision > nb_char)
 	{
-		ft_putnzeros(arg->precision - nb_char);
+		ft_putnchar('0', arg->precision - nb_char);
 		g_bytes += arg->precision - nb_char;
 	}
 	else if ((arg->sharp && nb > 0 && ++g_bytes) ||

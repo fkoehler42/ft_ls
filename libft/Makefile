@@ -6,7 +6,7 @@
 #    By: fkoehler <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 18:34:40 by fkoehler          #+#    #+#              #
-#    Updated: 2016/03/09 10:24:46 by fkoehler         ###   ########.fr        #
+#    Updated: 2016/03/12 17:42:21 by fkoehler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,13 @@ ft_memset.c \
 ft_print_array.c \
 ft_putchar.c \
 ft_putchar_fd.c \
+ft_putnchar.c \
 ft_putendl.c \
 ft_putendl_fd.c \
 ft_putnbr.c \
 ft_putnbr_fd.c \
 ft_putstr.c \
 ft_putnstr.c \
-ft_putnspaces.c \
-ft_putnzeros.c \
 ft_putstr_fd.c \
 ft_replace_char.c \
 ft_strcat.c \

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnspaces.c                                    :+:      :+:    :+:   */
+/*   ft_putnchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/28 14:38:24 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/01/28 14:42:25 by fkoehler         ###   ########.fr       */
+/*   Created: 2016/03/12 17:35:46 by fkoehler          #+#    #+#             */
+/*   Updated: 2016/03/12 17:41:42 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	ft_putnspaces(int n)
+void	ft_putnchar(char c, int n)
 {
-	int	i;
+	int		i;
+	char	s[n + 1];
 
 	i = 0;
 	while (i < n)
-	{
-		ft_putchar(' ');
-		i++;
-	}
+		s[i++] = c;
+	s[i] = 0;
+	write(1, s, n);
 }

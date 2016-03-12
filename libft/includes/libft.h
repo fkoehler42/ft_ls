@@ -6,7 +6,7 @@
 /*   By: fkoehler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 19:11:04 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/02 17:55:49 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 17:35:34 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ typedef struct		s_list
 
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
+void				ft_putnchar(char c, int n);
 void				ft_putstr(char const *s);
 void				ft_putnstr(char const *s, int n);
-void				ft_putnspaces(int n);
-void				ft_putnzeros(int n);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_print_array(char **array);
 void				ft_putendl(char const *s);

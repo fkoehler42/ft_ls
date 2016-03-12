@@ -6,15 +6,15 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:15:32 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/12 18:12:09 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/12 19:37:21 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "libft/includes/libft.h"
-# include "libft/includes/ft_printf.h"
+# include <libft.h>
+# include <ft_printf.h>
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
