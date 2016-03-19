@@ -6,7 +6,7 @@
 /*   By: fkoehler <fkoehler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 17:22:10 by fkoehler          #+#    #+#             */
-/*   Updated: 2016/03/11 18:02:33 by fkoehler         ###   ########.fr       */
+/*   Updated: 2016/03/19 18:47:28 by fkoehler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	set_flags1(char *arg, t_flag *flag)
 	}
 	else if (*arg == 'S' && (flag->f == 0))
 		flag->s = 1;
-	else if ((*arg != 'r') && (*arg != 't') && (*arg != 'l'))
+	else if ((*arg != 'r') && (*arg != 't') && (*arg != 'l') && (*arg != 'S'))
 		flag_error(*arg);
 }
 
